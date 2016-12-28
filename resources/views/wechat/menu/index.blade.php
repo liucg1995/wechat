@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends(config("config.extends"))
 @section('content')
     <section class="content-header">
         <h1>

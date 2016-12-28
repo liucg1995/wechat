@@ -11,30 +11,40 @@ namespace Guo\Wechat\Http\Controllers;
 
 use EasyWeChat\Core\Exception;
 use Illuminate\Http\Request;
-
-use EasyWeChat\Foundation\Application;
+use WechatToken;
+use EasyWeChat\Core\AccessToken;
 
 
 class MenuController extends CommonController
 {
 
+    public $wechat = null;
+
+    public function __construct()
+    {
+        $wechat = app('wechat');
+        $wechatToken = new WechatToken();
+        $accessToken = new AccessToken(config('app.wechatAppid'), config('app.wechatSecret'), $wechatToken);
+        $accessToken->prefix = config('app.redisKey.wechatToken');
+        $wechat['access_token'] = $accessToken;
+        $this->wechat = $wechat;
+    }
 
     /**
      * 显示菜单
      */
     public function index()
     {
-        $options = config("app.options");
-        $app = new Application($options);
+        $app = $this->wechat;
         $menus = $app->menu;
         try {
             $res = $menus->all();
             new  Exception($res);
             $menudata = json_encode($res->menu);
         } catch (Exception $e) {
-            $menudata = ' ';
+            $menudata = json_encode(array());
         }
-        return view("wechat::wechat.menu.index", ['menu' => $menudata]);
+        return view("wechat.menu.index", ['menu' => $menudata]);
     }
 
     /**
@@ -43,8 +53,7 @@ class MenuController extends CommonController
     public function setMenu(Request $request)
     {
         $menuData = $request->button;
-        $options = config("app.options");
-        $app = new Application($options);
+        $app = $this->wechat;
         $menu = $app->menu;
         try {
             $res = $menu->add($menuData['button']);
@@ -60,4 +69,5 @@ class MenuController extends CommonController
             );
         }
     }
+
 }
