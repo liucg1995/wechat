@@ -9,14 +9,13 @@
 namespace Guo\Wechat\Http\Controllers;
 
 
-use App\Http\Controllers\Admin\AdminController;
 use EasyWeChat\Core\Exception;
 use Illuminate\Http\Request;
 
 use EasyWeChat\Foundation\Application;
 
 
-class MenuController extends AdminController
+class MenuController extends CommonController
 {
     public $app = null;
 
@@ -40,15 +39,7 @@ class MenuController extends AdminController
         } catch (Exception $e) {
             $menudata = ' ';
         }
-//        $buttons = [
-//            [
-//                "type" => "view",
-//                "name" => "财经日历",
-//                "url" => "http://staging.jinrong.tonglingdi.cn/index"
-//            ]
-//        ];
-//        $menus->add($buttons);
-        return view("wechat.menu.index", ['menu' => $menudata]);
+        return view("wechat::wechat.menu.index", ['menu' => $menudata]);
     }
 
     /**

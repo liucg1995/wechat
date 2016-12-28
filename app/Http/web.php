@@ -10,11 +10,13 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
+Route::group(['namespace' => '\Guo\Wechat\Http\Controllers'], function(){
 
-Route::get('filelist', '\Guo\File\Http\Controllers\HomeController@filelist');
-Route::get('dirlist', '\Guo\File\Http\Controllers\HomeController@dirlist');
-Route::get('getlog', '\Guo\File\Http\Controllers\HomeController@getlog');
-Route::get('file', '\Guo\File\Http\Controllers\HomeController@getcontent');
-Route::get('delfile', '\Guo\File\Http\Controllers\HomeController@delfile');
-Route::get('test', '\Guo\File\Http\Controllers\HomeController@test');
+    Route::get('filelist', 'HomeController@filelist');
+    Route::get('dirlist', 'HomeController@dirlist');
+    Route::get('getlog', 'HomeController@getlog');
+    Route::get('file', 'HomeController@getcontent');
+    Route::get('delfile', 'HomeController@delfile');
+    Route::get('test', 'HomeController@test');
+});
 
