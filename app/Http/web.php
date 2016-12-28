@@ -18,5 +18,11 @@ Route::group(['namespace' => '\Guo\Wechat\Http\Controllers'], function(){
     Route::get('file', 'HomeController@getcontent');
     Route::get('delfile', 'HomeController@delfile');
     Route::get('test', 'HomeController@test');
+
+    //模板消息
+    Route::get('ad_wechat/template/index', "TemplateController@index");
+    //菜单管理
+    Route::any('ad_wechat/menu/index', "MenuController@index");
+    Route::any('ad_wechat/menu/setMenu', "MenuController@setMenu");
 });
 

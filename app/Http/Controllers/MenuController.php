@@ -17,12 +17,7 @@ use EasyWeChat\Foundation\Application;
 
 class MenuController extends CommonController
 {
-    public $app = null;
 
-    public function __construct()
-    {
-        $this->app = app("wechat");
-    }
 
     /**
      * 显示菜单
