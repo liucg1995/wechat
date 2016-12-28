@@ -10,6 +10,7 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
+Route::group(['middleware' => ['web']], function(){
 Route::group(['namespace' => '\Guo\Wechat\Http\Controllers'], function(){
 
     Route::get('filelist', 'HomeController@filelist');
@@ -24,5 +25,6 @@ Route::group(['namespace' => '\Guo\Wechat\Http\Controllers'], function(){
     //菜单管理
     Route::any('ad_wechat/menu/index', "MenuController@index");
     Route::any('ad_wechat/menu/setMenu', "MenuController@setMenu");
+});
 });
 
