@@ -41,7 +41,7 @@ class MassIndexController extends CommonController
     {
 //        echo config("wechat-config.extends");
         $masslog = new MassLog;
-        $resultData = $masslog->orderBy('id', 'desc')->paginate(20);
+        $resultData = $masslog->where('way','1')->orderBy('id', 'desc')->paginate(20);
         $result = $resultData->toArray();
         $result = $result['data'];
         $medias = Media::where(['multi_order' => '0'])->get(['id', 'content', 'title', 'media_type', 'bundle_id']);
@@ -80,7 +80,7 @@ class MassIndexController extends CommonController
     public function massTestIndex(Request $request)
     {
         $masslog = new MassLog;
-        $resultData = $masslog->orderBy('id', 'desc')->paginate(20);
+        $resultData = $masslog->where('way','2')->orderBy('id', 'desc')->paginate(20);
         $result = $resultData->toArray();
         $result = $result['data'];
         $wechat = $this->wechat;
