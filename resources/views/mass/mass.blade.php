@@ -117,7 +117,7 @@
                                                 <div class="pic-upload btn btn-block btn-info btn-flat"
                                                      title="点击上传">点击上传
                                                 </div>
-                                                <img id="logo" src="">
+                                                <img id="logo"  src="">
                                                 <input type="hidden" name="logo" value="">
                                             </div>
                                         </div>
@@ -127,6 +127,11 @@
                                                    name="resubmit"
                                                    class="btn btn-primary"/>
                                         </div>
+                                        <style>
+                                            #logo{
+                                                width:100%;
+                                            }
+                                        </style>
                                     </div>
                                 </div>
                             </div>

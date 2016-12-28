@@ -369,23 +369,24 @@ class MassController extends CommonController
         ]);
 
         $wechat = $this->wechat;
-        $userId = $request->userId;
+        $userId="";
+        $openId = $request->userId;
         $mediaId = $request->media_id;
 
         if ($validator->fails()) {
-            return redirect('/masstest')
+            return redirect('/massage/test')
                 ->withErrors($validator)
                 ->withInput();
 
         } else {
-            try {
-                $user = UserSns::where('user_id', $userId)->where('status', '0')->first(['openid']);
-                $openId = $user->openid;
-            } catch (Exception $e) {
-                return redirect('/masstest')
-                    ->withErrors(array(0 => 'userId不正确/用户没有关注'))
-                    ->withInput();
-            }
+//            try {
+//                $user = UserSns::where('user_id', $userId)->where('status', '0')->first(['openid']);
+//                $openId = $user->openid;
+//            } catch (Exception $e) {
+//                return redirect('/masstest')
+//                    ->withErrors(array(0 => 'userId不正确/用户没有关注'))
+//                    ->withInput();
+//            }
 
             $broadcast = $wechat->broadcast; //var_dump($openId);die;
             // TEXT别名方式    
@@ -401,7 +402,7 @@ class MassController extends CommonController
                 $massLog->contents = '临时图片媒体ID：' . $mediaId;
                 $massLog->result = '提交成功';
                 $massLog->save();
-                return redirect('masstest')->with('mgssages', array(0 => '提交成功'));
+                return redirect('massage/test')->with('mgssages', array(0 => '提交成功'));
             } else {
                 $massLog = new MassLog();
                 $massLog->number = 1;
@@ -411,7 +412,7 @@ class MassController extends CommonController
                 $massLog->contents = '临时图片媒体ID：' . $mediaId;
                 $massLog->result = '提交失败';
                 $massLog->save();
-                return redirect('masstest')->with('mgssages', array(0 => '提交失败'));
+                return redirect('massage/test')->with('mgssages', array(0 => '提交失败'));
             }
         }
     }
@@ -459,7 +460,7 @@ class MassController extends CommonController
                 $user = UserSns::where('user_id', $userId)->where('status', '0')->first(['openid']);
                 $openId = $user->openid;
             } catch (Exception $e) {
-                return redirect('/masstest')
+                return redirect('/massage/test')
                     ->withErrors(array(0 => 'userId不正确/用户没有关注'))
                     ->withInput();
             }

@@ -55,6 +55,7 @@
     <div class="panel-body">
         <div id="validation-errors"></div>
         {!! Form::open( array('url' =>['/upload_img'], 'method' => 'post', 'id'=>'imgForm', 'files'=>true) ) !!}
+        {{ csrf_field() }}
         <div class="form-group">
             <label>图片上传</label>
             <span class="require">(*)</span>
