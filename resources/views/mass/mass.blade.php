@@ -389,7 +389,7 @@
                                         @endif
                                     </div>
                                 </div>
-                                @include('layout.page', ['paginator' => $resultData])
+                                @include('wechat::layout.page', ['paginator' => $resultData])
                             </div>
                         </div>
                     </div>

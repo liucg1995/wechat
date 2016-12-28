@@ -4,6 +4,7 @@ namespace Guo\Wechat\Http\Controllers;
 
 
 
+use EasyWeChat\Foundation\Application;
 use Illuminate\Http\Request;
 use Guo\Wechat\Model\MassLog;
 use Guo\Wechat\Model\Media;
@@ -18,7 +19,7 @@ use Illuminate\Support\Facades\Redis;
 use EasyWeChat\Message\Text;
 use EasyWeChat\Message\Material;
 
-class MassController extends Controller
+class MassController extends CommonController
 {
     public $wechat;
     public $month = null;
@@ -31,11 +32,15 @@ class MassController extends Controller
     {
 //        $options = config("app.options");
 //        $app = new Application($options);
-        $wechat = app('wechat');
-        $wechatToken = new WechatToken();
-        $accessToken = new AccessToken(config('app.wechatAppid'), config('app.wechatSecret'), $wechatToken);
-        $accessToken->prefix = config('app.redisKey.wechatToken');
-        $wechat['access_token'] = $accessToken;
+//        $wechat = app('wechat');
+//        $wechatToken = new WechatToken();
+//        $accessToken = new AccessToken(config('app.wechatAppid'), config('app.wechatSecret'), $wechatToken);
+//        $accessToken->prefix = config('app.redisKey.wechatToken');
+//        $wechat['access_token'] = $accessToken;
+//        $this->wechat = $wechat;
+
+        $options=config("app.options");
+        $wechat=new Application($options);
         $this->wechat = $wechat;
 
         switch ($request->select) {
@@ -300,23 +305,24 @@ class MassController extends Controller
         ]);
 
         $wechat = $this->wechat;
-        $userId = $request->userId;
+        $userId="";
+        $openId = $request->userId;
         $text = $request->text;
 
         if ($validator->fails()) {
-            return redirect('/masstest')
+            return redirect('/massage/test')
                 ->withErrors($validator)
                 ->withInput();
 
         } else {
-            try {
-                $user = UserSns::where('user_id', $userId)->where('status', '0')->first(['openid']);
-                $openId = $user->openid;
-            } catch (Exception $e) {
-                return redirect('/massf')
-                    ->withErrors(array(0 => 'userId不正确/用户没有关注'))
-                    ->withInput();
-            }
+//            try {
+////                $user = UserSns::where('user_id', $userId)->where('status', '0')->first(['openid']);
+////                $openId = $user->openid;
+//            } catch (Exception $e) {
+//                return redirect('/massf')
+//                    ->withErrors(array(0 => 'userId不正确/用户没有关注'))
+//                    ->withInput();
+//            }
 
             $broadcast = $wechat->broadcast; //var_dump($openId);die;
             // TEXT别名方式    
@@ -332,7 +338,7 @@ class MassController extends Controller
                 $massLog->contents = $text;
                 $massLog->result = '提交成功';
                 $massLog->save();
-                return redirect('masstest')->with('mgssages', array(0 => '提交成功'));
+                return redirect('massage/test')->with('mgssages', array(0 => '提交成功'));
             } else {
                 $massLog = new MassLog();
                 $massLog->number = 1;
@@ -342,7 +348,7 @@ class MassController extends Controller
                 $massLog->contents = $text;
                 $massLog->result = '提交失败';
                 $massLog->save();
-                return redirect('masstest')->with('mgssages', array(0 => '提交失败'));
+                return redirect('massage/test')->with('mgssages', array(0 => '提交失败'));
             }
         }
 

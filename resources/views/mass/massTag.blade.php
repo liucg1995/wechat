@@ -1,7 +1,5 @@
 @extends("layouts.app")
 @section('content')
-    @include('wechat::uploadpicture.upload_img')
-    <script src="http://malsup.github.io/jquery.form.js"></script>
     @if (count($errors) > 0)
         <div class="alert alert-danger alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -308,7 +306,7 @@
                                 @endif
                             </div>
                         </div>
-                        @include('layout.page', ['paginator' => $resultData])
+                        @include('wechat::layout.page', ['paginator' => $resultData])
                     </div>
                 </div>
             </div>
