@@ -1,0 +1,59 @@
+/*登陆弹出框*/
+
+.poplogin {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 20000;
+    width: 100%;
+    height: 100%;
+}
+.poplogin .popbg {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: url(http://cdn2.jin10x.com/news/jin10/img/popbg.png) repeat;
+    z-index: 200;
+}
+.poplogin .poplg_con {
+    position: fixed;
+    z-index: 205;
+    width: 340px;
+    height: 440px;
+    border-radius: 6px;
+    background: #fff;
+    left: 50%;
+    top: 50%;
+    margin: -220px 0 0 -170px;
+}
+.poplogin .poplg_con .closeimg{ position: absolute; right: 0px; top: 0px; width: 30px; height: 30px; z-index: 2; cursor: pointer}
+.poplg_top {
+    background: url(http://cdn2.jin10.com/news/jin10/img/news_icon.png) no-repeat;
+    background-position: 15px -423px;
+    width: 100%;
+    height: 60px;
+}
+.poplg_top .poplg_help {
+    background: url(http://cdn2.jin10.com/news/jin10/img/news_icon.png) no-repeat;
+    background-position: 14px -468px;
+    width: 60px;
+    height: 50px;
+    float: right;
+    cursor: pointer;
+}
+.poplg_ti {
+    color: #107BCF;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 10px auto 25px;
+}
+.poplogin .incon {
+    margin: 15px auto;
+    width: 65%;
+    position: relative;
+    height: 340px;
+}

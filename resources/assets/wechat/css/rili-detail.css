@@ -1,0 +1,40 @@
+body {
+	font-family: Tahoma,Arial,Verdana;
+	font-size: 12px;
+	color: black;
+}
+
+a:link {color: #84c4e2;}
+a:visited {color:#84c4e2;}
+a:hover {color: #cd82ad;}
+a:active {color: #84c4e2;}
+*{margin: 0;padding: 0;word-wrap: break-word;}
+			body{background:#fff;color: #333333;font-size: 14px;line-height: 24px;margin:0 auto;position: relative;text-rendering:optimizelegibility;top: 0;font-family:"微软雅黑", "黑体","arial","calibri";}
+			img {border: medium none;margin: 0  auto; width: auto; max-width: 100%; padding: 0;vertical-align:middle;}
+			ul, ol, li {list-style: none outside none;font-size: 100%;vertical-align: baseline;}
+			a{ text-decoration:none;color: #333333;outline: none}
+			table{width:100%; text-align: center;border-collapse:collapse;border-spacing:0; margin: 10px 0; }
+			table td{ border: 1px solid #CCCCCC;}
+			input[type=number],input[type=text],input[type=date],input[type=button],select,textarea{font-family:"微软雅黑","arial","calibri"; font-size: 14px; border:none; background:transparent; width:100%; -webkit-appearance: none;outline:none;}
+			.clear:after{content:"."; display:block;height:0;clear:both;visibility:hidden;}
+			
+			.rili-detail{ margin: 10px;}
+			.rili-t{ display: none; text-align: center;font-size: 16px; padding:5px 0 10px;border-bottom: 1px solid #E1E1E1;}
+			.rili-explain{ }
+			.rili-h{  color:#0098F1;padding: 8px 0; border-bottom: 1px dashed #E1E1E1;}
+			.rili-h li{ position: relative;line-height: 20px;min-height: 20px; margin: 8px 0; width: 100%;}
+			.rili-h .p-t{ position: absolute; left: 0; top: 0;width: 115px; }
+			.rili-h .p-c{margin: 0 0 0 115px; }
+			
+			.rili-panel{padding: 10px 0; border-bottom: 1px dashed #E1E1E1;}
+			.rili-panel span{color: #FF7200;display: inline-block;line-height: 14px; padding: 0 0 0 5px; border-left: 1px solid #FF7200;}
+			
+			.rili-table{}
+			.daytime{height: 40px; margin: 20px 0 0; width: 100%;}
+			.daytime div{ float: left;height: 30px; line-height: 30px; margin: 0 5px 0 0;}
+			.daytime .bor{  border: 1px solid #C5C5C5; border-radius: 4px; padding: 0 6px;}
+			.daytime .bor input[type=text]{position: relative!important; left: 0;top:0;color: #333333; width: 80px;padding: 5px 0; line-height: 20px;height: 20px; font-size: 14px;}
+			.daytime .btn{border: 1px solid #0087D6; color: #FFFFFF; background-color: #0098F1; border-radius: 4px;}
+			.daytime .btn input[type=button]{cursor: pointer; color: #FFFFFF; padding:4px 20px; height: 30px; line-height: 20px}
+
+			#chartdiv{ width: 100%; height: 400px!important;}
