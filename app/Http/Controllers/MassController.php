@@ -5,9 +5,9 @@ namespace Guo\Wechat\Http\Controllers;
 
 
 use Illuminate\Http\Request;
-use Guo\Wechat\Http\Model\MassLog;
-use Guo\Wechat\Http\Model\Media;
-use Guo\Wechat\Http\Model\UserSns;
+use Guo\Wechat\Model\MassLog;
+use Guo\Wechat\Model\Media;
+use Guo\Wechat\Model\UserSns;
 use Validator;
 use DB;
 use Exception;

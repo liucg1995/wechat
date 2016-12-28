@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Guo\Wechat\Http\Controllers;
 
-use Guo\Wechat\Http\Model\Media;
-use App\Model\RuleSpecial;
-use Guo\Wechat\Http\Model\Rule;
-use Guo\Wechat\Http\Model\RuleCate;
-use Guo\Wechat\Http\Model\WechatToken;
+use Guo\Wechat\Model\Media;
+use Guo\Wechat\Model\RuleSpecial;
+use Guo\Wechat\Model\Rule;
+use Guo\Wechat\Model\RuleCate;
+use Guo\Wechat\Model\WechatToken;
 use EasyWeChat\Core\AccessToken;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;

@@ -6,7 +6,7 @@
  * Time: 下午5:07.
  */
 
-namespace Guo\Wechat\Http\Model;
+namespace Guo\Wechat\Model;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Redis;

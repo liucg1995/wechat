@@ -6,7 +6,7 @@
  * Time: 下午10:44.
  */
 
-namespace Guo\Wechat\Http\Model;
+namespace Guo\Wechat\Model;
 use Illuminate\Database\Eloquent\Model;
 
 class MediaBundle extends Model
