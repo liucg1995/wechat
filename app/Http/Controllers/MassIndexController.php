@@ -8,6 +8,7 @@ use Guo\Wechat\Model\Media;
 use Validator;
 use EasyWeChat\Core\AccessToken;
 use DB;
+use EasyWeChat\Foundation\Application;
 
 /**
  * 群发模板页面
@@ -20,11 +21,14 @@ class MassIndexController extends CommonController
 
     public function __construct(Request $request)
     {
-        $wechat = app('wechat');
-        $wechatToken = new WechatToken();
-        $accessToken = new AccessToken(config('app.wechatAppid'), config('app.wechatSecret'), $wechatToken);
-        $accessToken->prefix = config('app.redisKey.wechatToken');
-        $wechat['access_token'] = $accessToken;
+//        $wechat = app('wechat');
+//        $wechatToken = new WechatToken();
+//        $accessToken = new AccessToken(config('app.wechatAppid'), config('app.wechatSecret'), $wechatToken);
+//        $accessToken->prefix = config('app.redisKey.wechatToken');
+//        $wechat['access_token'] = $accessToken;
+//        $this->wechat = $wechat;
+        $options=config("app.options");
+        $wechat=new Application($options);
         $this->wechat = $wechat;
     }
 
@@ -35,6 +39,7 @@ class MassIndexController extends CommonController
      */
     public function massIndex(Request $request)
     {
+//        echo config("wechat-config.extends");
         $masslog = new MassLog;
         $resultData = $masslog->orderBy('id', 'desc')->paginate(20);
         $result = $resultData->toArray();
@@ -58,7 +63,7 @@ class MassIndexController extends CommonController
             }
 
         }
-        return view('mass.massTag', [
+        return view('wechat::mass.massTag', [
             'result' => $result,
             'resultData' => $resultData,
             'medias' => $mediasView,
@@ -101,7 +106,7 @@ class MassIndexController extends CommonController
                 $mediasViewKf[$v->id . '#【单图文】' . $v->title] = '[单图文]' . $v->title;
             }
         }
-        return view('mass.mass', [
+        return view('wechat::mass.mass', [
             'result' => $result,
             'resultData' => $resultData,
             'tags' => $tags,

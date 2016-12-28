@@ -13,6 +13,7 @@ use EasyWeChat\Core\Exception;
 use Illuminate\Http\Request;
 use WechatToken;
 use EasyWeChat\Core\AccessToken;
+use EasyWeChat\Foundation\Application;
 
 
 class MenuController extends CommonController
@@ -22,11 +23,13 @@ class MenuController extends CommonController
 
     public function __construct()
     {
-        $wechat = app('wechat');
-        $wechatToken = new WechatToken();
-        $accessToken = new AccessToken(config('app.wechatAppid'), config('app.wechatSecret'), $wechatToken);
-        $accessToken->prefix = config('app.redisKey.wechatToken');
-        $wechat['access_token'] = $accessToken;
+//        $wechat = app('wechat');
+//        $wechatToken = new WechatToken();
+//        $accessToken = new AccessToken(config('app.wechatAppid'), config('app.wechatSecret'), $wechatToken);
+//        $accessToken->prefix = config('app.redisKey.wechatToken');
+//        $wechat['access_token'] = $accessToken;
+        $options=config("app.options");
+        $wechat=new Application($options);
         $this->wechat = $wechat;
     }
 
@@ -44,7 +47,7 @@ class MenuController extends CommonController
         } catch (Exception $e) {
             $menudata = json_encode(array());
         }
-        return view("wechat.menu.index", ['menu' => $menudata]);
+        return view("wechat::wechat.menu.index", ['menu' => $menudata]);
     }
 
     /**

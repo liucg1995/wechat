@@ -21,3 +21,4 @@ Register the service providers to enable the package:
 ```
 Guo\File\Providers\AppServiceProvider::class,
 ```
+
