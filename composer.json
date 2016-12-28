@@ -1,18 +1,26 @@
 {
-    "name": "guo/wechat",
-    "description": "wechat",
-    "keywords": ["laravel"],
-    "license": "MIT",
-    "type": "library",
-    "require": {
-        "php": ">=5.3",
-        "overtrue/laravel-wechat": "~3.0"
-     },
-     "require-dev": {
-    },
-    "autoload": {
-        "psr-4": {
-            "Guo\\Wechat\\": "app/"
-        }
-    }   
+  "name": "guo/wechat",
+  "description": "wechat",
+  "keywords": [
+    "laravel"
+  ],
+  "license": "MIT",
+  "type": "library",
+  "authors": [
+    {
+      "name": "guo",
+      "email": "164445438@qq.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.3",
+    "overtrue/laravel-wechat": "~3.0"
+  },
+  "require-dev": {
+  },
+  "autoload": {
+    "psr-4": {
+      "Guo\\Wechat\\": "app/"
+    }
+  }
 }
