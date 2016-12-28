@@ -23,8 +23,8 @@ Route::group(['namespace' => '\Guo\Wechat\Http\Controllers'], function(){
     //模板消息
     Route::get('ad_wechat/template/index', "TemplateController@index");
     //菜单管理
-    Route::any('ad_wechat/menu/index', "MenuController@index");
-    Route::any('ad_wechat/menu/setMenu', "MenuController@setMenu");
+    Route::any('wechat/menu', "MenuController@index");
+    Route::any('wechat/setMenu', "MenuController@setMenu");
 });
 });
 

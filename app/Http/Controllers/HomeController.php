@@ -9,7 +9,7 @@ class HomeController extends Controller
 {
     public function test()
     {
-        return view('welcome');
+       echo config("config.extends");
     }
     public function delfile(Request $request)
     {

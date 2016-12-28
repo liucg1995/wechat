@@ -132,7 +132,7 @@ var menu = {
             console.log(self.data);
             $.ajax({
                 type: "POST",
-                url: "/ad_wechat/menu/setMenu",
+                url: "/wechat/setMenu",
                 data: {button: {button: self.data},_token:_token},
 //                        dataType: 'json',
                 success: function (data) {
