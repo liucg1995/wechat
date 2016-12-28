@@ -25,6 +25,9 @@ Route::group(['namespace' => '\Guo\Wechat\Http\Controllers'], function(){
     //菜单管理
     Route::any('wechat/menu', "MenuController@index");
     Route::any('wechat/setMenu', "MenuController@setMenu");
+    //模板
+    Route::get('/massage/index', 'MassIndexController@massIndex');//正式
+    Route::get('/massage/test', 'MassIndexController@massTestIndex');//测试
     //逻辑处理
     Route::group(['prefix' => 'mass'], function () {//KING
         //正式

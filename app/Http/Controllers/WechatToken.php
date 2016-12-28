@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Guo\Wechat\Http\Controllers;
 
 use Illuminate\Support\Facades\Redis;
 use Config;
