@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Redis;
  * 3.投票口令 跟随投票口令一起修改,用户输入"投票口令",公众号返回具体的投票口令内容
  * 4.实际的投票口令内容
  */
-class WechatController extends Controller
+class WechatController extends CommonController
 {
     public $request;
 

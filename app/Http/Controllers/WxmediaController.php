@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers;
+namespace Guo\Wechat\Http\Controllers;
 
 use App\Media;
 use App\Complaint;
@@ -11,18 +11,14 @@ use EasyWeChat\Core\Exception;
 use App\WechatToken;
 use EasyWeChat\Core\AccessToken;
 
-class WxmediaController extends Controller
+class WxmediaController extends CommonController
 {
 
     public $wechat;
 
     public function __construct()
     {
-        $wechat = app('wechat');
-        $wechatToken = new WechatToken();
-        $accessToken = new AccessToken(config('app.wechatAppid'), config('app.wechatSecret'), $wechatToken);
-        $accessToken->prefix = config('app.redisKey.wechatToken');
-        $wechat['access_token'] = $accessToken;
+        $wechat = $this->wechat(0);
         $this->wechat = $wechat;
         if (!isset($_SESSION['is_base'])) {
             $_SESSION["target_urls"] = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
@@ -61,7 +57,7 @@ class WxmediaController extends Controller
         } else {
             $link = '';
         }
-        return view("index.media", [
+        return view("wechat::index.media", [
             'data' => $media,
             'config' => $js,
             'msg' => $msg,
@@ -138,7 +134,7 @@ class WxmediaController extends Controller
     {
         $aid = $request->aid;
 
-        return view("index.complaint", [
+        return view("wechat::index.complaint", [
             'aid' => $aid,
         ]);
     }
@@ -147,7 +143,7 @@ class WxmediaController extends Controller
     {
         $aid = $request->aid;
 
-        return view("index.complainttort", [
+        return view("wechat::index.complainttort", [
             'aid' => $aid,
         ]);
     }
@@ -157,7 +153,7 @@ class WxmediaController extends Controller
         $aid = $request->aid;
         $title = $request->title;
         $data = Media::where('id', $aid)->first();
-        return view("index.complaintcopy", [
+        return view("wechat::index.complaintcopy", [
             'aid' => $aid,
             'title' => $title,
             'data' => $data
