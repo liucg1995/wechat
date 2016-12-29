@@ -7,7 +7,10 @@
  * Time: 10:51
  */
 namespace Guo\Wechat\Http\Controllers;
+
+use EasyWeChat\Foundation\Application;
 use Illuminate\Routing\Controller;
+
 
 /**
  * Class AdminController    程序后台基础控制器

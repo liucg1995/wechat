@@ -1,4 +1,4 @@
-@extends("layouts.app")
+@extends(config("wxconfig.extends"))
 @section('content')
     @include('wechat::uploadpicture.upload_img')
     @if (count($errors) > 0)
@@ -47,7 +47,7 @@
             <div class='col-sm-12'>
                 <div class="box">
                     <div class="content">
-                        <form action="/mass/sendpicture" method="post" name="mass" id="mass">
+                        <form action="/mass/sendtext" method="post" name="mass" id="mass">
                             {{ csrf_field()}}
                             <label for='tag'>所有用户发送</label>
                             <input type='hidden' name='select' value='users' id='users'>
@@ -81,9 +81,13 @@
                                 </div>
                             </div>
                             <div class="form-group col-sm-12" style="padding-left: 0">
-                                <input type="submit" value="群发" name="opsubmit" onclick="return confirm('确定要群发?')"
-                                       class="btn btn-primary"/>
+                                <input type="submit" value="群发" name="opsubmit" onclick="return confirm('确定要群发?')" class="btn btn-primary"/>
                             </div>
+                            <style>
+                                #logo{
+                                    width:100%;
+                                }
+                            </style>
                         </form>
                     </div>
                 </div>

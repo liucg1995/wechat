@@ -75,7 +75,6 @@ class MassController extends CommonController
                 ->withInput();
 
         }
-        die;
         $number = $this->number;
         $wechat = $this->wechat;
         $text = $request->text;

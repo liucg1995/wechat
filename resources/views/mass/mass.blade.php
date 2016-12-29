@@ -1,4 +1,4 @@
-@extends(config("wechat-config.extends"))
+@extends(config("wxconfig.extends"))
 @section('content')
     @include('wechat::uploadpicture.upload_img')
     <script src="http://malsup.github.io/jquery.form.js"></script>
@@ -55,7 +55,7 @@
                                                                                     value='test' id='tset'>
                                 <div class="box-header with-border box-danger form-group">
                                     <label class="col-sm-2 control-label"
-                                           style="height:34px;line-height:34px;margin-bottom: 0;padding-left:0px">userID:</label>
+                                           style="height:34px;line-height:34px;margin-bottom: 0;padding-left:0px">OPENID</label>
                                     <div class="col-sm-10">
                                         <input name="userId" type="text" value="{{$userID or old('userId')}}"
                                                placeholder="请输入<用户管理>中的userID号" class=" form-control" size="30">
@@ -98,10 +98,10 @@
                                 <input type='hidden' name='select' value='test' id='tset'>
                                 <div class="box-header with-border box-danger form-group">
                                     <label class="col-sm-2 control-label"
-                                           style="height:34px;line-height:34px;margin-bottom: 0;padding-left:0px">userID:</label>
+                                           style="height:34px;line-height:34px;margin-bottom: 0;padding-left:0px">OPENID</label>
                                     <div class="col-sm-10">
                                         <input name="userId" type="text" value="{{$userID or old('userId')}}"
-                                               placeholder="请输入<用户管理>中的userID号" class=" form-control" size="30">
+                                               placeholder="请输入OPENID" class=" form-control" size="30">
                                     </div>
                                 </div>
                             </h3>
@@ -150,10 +150,10 @@
                                 <input type='hidden' name='select' value='test' id='tset'>
                                 <div class="box-header with-border box-danger form-group">
                                     <label class="col-sm-2 control-label"
-                                           style="height:34px;line-height:34px;margin-bottom: 0;padding-left:10px">userID:</label>
+                                           style="height:34px;line-height:34px;margin-bottom: 0;padding-left:10px">OPENID</label>
                                     <div class="col-sm-10">
                                         <input name="userId" type="text" value="{{$userID or old('userId')}}"
-                                               placeholder="请输入<用户管理>中的userID号" class=" form-control" size="30">
+                                               placeholder="请输入OPENID" class=" form-control" size="30">
                                     </div>
                                 </div>
                             </h3>
@@ -190,10 +190,10 @@
                                 <input type='hidden' name='select' value='test' id='tset'>
                                 <div class="box-header with-border box-danger form-group">
                                     <label class="col-sm-2 control-label"
-                                           style="height:34px;line-height:34px;margin-bottom: 0;padding-left:0px">userID:</label>
+                                           style="height:34px;line-height:34px;margin-bottom: 0;padding-left:0px">OPENID:</label>
                                     <div class="col-sm-10">
                                         <input name="userId" type="text" value="{{$userID or old('userId')}}"
-                                               placeholder="请输入<用户管理>中的userID号" class=" form-control" required
+                                               placeholder="请输入OPENID" class=" form-control" required
                                                size="30">
                                     </div>
                                 </div>
@@ -280,10 +280,10 @@
                                 <input type='hidden' name='select' value='test' id='tset'>
                                 <div class="box-header with-border box-danger form-group">
                                     <label class="col-sm-2 control-label"
-                                           style="height:34px;line-height:34px;margin-bottom: 0;padding-left:0px">userID:</label>
+                                           style="height:34px;line-height:34px;margin-bottom: 0;padding-left:0px">OPENID</label>
                                     <div class="col-sm-10">
                                         <input name="userId" type="text" value="{{$userID or old('userId')}}"
-                                               placeholder="请输入<用户管理>中的userID号" class=" form-control" size="30">
+                                               placeholder="请输入OPENID" class=" form-control" size="30">
                                     </div>
                                 </div>
                             </h3>
@@ -385,7 +385,7 @@
                                                         <td class="sorting_1">{{$data['contents']}}</td>
                                                         <td class="sorting_1">{{$data['result']}}</td>
                                                         <td class="sorting_1">{{$data['number']}}</td>
-                                                        <td class="sorting_1">{{$data['way']}}</td>
+                                                        <td class="sorting_1">{{$data['way']=='1'?'正式群发':"测试群发"}}</td>
                                                         <td class="sorting_1">{{$data['updated_at']}}</td>
                                                     </tr>
                                                 @endforeach
