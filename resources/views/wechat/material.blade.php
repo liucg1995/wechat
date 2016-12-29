@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends(config("wxconfig.extends"))
 
 @section('content')
     <section class="content-header">
@@ -80,5 +80,5 @@
     </section>
 
     @endif
-    @include('pagination.tfoot', ['paginator' => $materialData])
+    @include('wechat::pagination.tfoot', ['paginator' => $materialData])
 @endsection

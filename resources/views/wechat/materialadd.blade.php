@@ -1,7 +1,7 @@
-@extends('layouts.app') 
+@extends(config("wxconfig.extends"))
 
 @section('content')
-        <script src="/static/js/bootstrap-tokenfield.js"></script>
+<script src="/static/js/bootstrap-tokenfield.js"></script>
 <script type="text/javascript" src="/static/js/jquery.ui.widget.js"></script>
 <script type="text/javascript" src="/static/js/jquery.iframe-transport.js"></script>
 <script type="text/javascript" src="/static/js/jquery.fileupload.js"></script>

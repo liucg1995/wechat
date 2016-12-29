@@ -1,4 +1,4 @@
-@extends('layouts.app') 
+@extends(config("wxconfig.extends"))
 
 @section('content')
     <section class="content-header">

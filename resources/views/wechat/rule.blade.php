@@ -1,4 +1,4 @@
-@extends('layouts.app') @section('content')
+@extends(config("wxconfig.extends")) @section('content')
     <section class="content-header">
         <h1>
             回复规则
@@ -10,7 +10,7 @@
             <li class="active">回复规则</li>
         </ol>
     </section>
-    @include('layouts.error', ['errors' => $errors])
+    @include('wechat::layouts.error', ['errors' => $errors])
     <section class="content-header">
 
         <!-- SELECT2 EXAMPLE -->
@@ -130,7 +130,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                @include('pagination.tfoot', ['paginator' => $rules])
+                                @include('wechat::pagination.tfoot', ['paginator' => $rules])
                             </div>
                         </div>
                     </div>

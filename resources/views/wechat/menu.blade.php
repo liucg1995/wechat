@@ -1,6 +1,6 @@
-@extends('layouts.app')
+@extends(config("wxconfig.extends"))
 @section('content')
-    @include('layouts.error', ['errors' => $errors])
+    @include('wechat::layouts.error', ['errors' => $errors])
     <section class="content-header">
         <h1>
             菜单设置
