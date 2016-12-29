@@ -7,6 +7,7 @@ use Guo\Wechat\Model\RuleSpecial;
 use Guo\Wechat\Model\Rule;
 use Guo\Wechat\Model\RuleCate;
 use Guo\Wechat\Model\WechatToken;
+use Validator;
 use EasyWeChat\Core\AccessToken;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
@@ -87,13 +88,18 @@ class WechatController extends CommonController
     public function setRule()
     {
         $r = $this->request;
-
-        $this->validate($r, [
+$arr=$r->toArray();
+        $validator=Validator::make($arr, [
             'keyword' => 'required|string',
             'cate_id' => 'required|integer',
             'media_id' => 'required|integer',
             'media_type' => 'required|integer',
         ]);
+        if ($validator->fails()) {
+            return redirect('wechat/rule')
+                ->withErrors($validator)
+                ->withInput();
+        }
 
         //判断是否有重复
         $ruleRepeat = Rule::where('keyword', $r->keyword)->first();

@@ -39,6 +39,16 @@ Route::group(['namespace' => '\Guo\Wechat\Http\Controllers'], function(){
     Route::any('/media/upload', 'MediaController@upload');
     Route::any('/media/json', 'MediaController@json');
     Route::any('/media/delete', 'MediaController@delete');
+
+    //粉丝消息
+    Route::any('/message', 'MessageController@index');
+    //更新用户信息
+    Route::get('/wechat/follow', 'WechatController@follow');
+    Route::post('/wechat/follow', 'WechatController@setFollow');
+
+    Route::get('/wechat/rule', 'WechatController@rule');
+    Route::post('/wechat/rule', 'WechatController@setRule');
+    Route::get('/wechat/deleterule', 'WechatController@deleteRule');
     Route::any('/aa', function (){
         echo 'aaa';
     });

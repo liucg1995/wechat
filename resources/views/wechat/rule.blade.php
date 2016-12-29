@@ -10,7 +10,7 @@
             <li class="active">回复规则</li>
         </ol>
     </section>
-    @include('wechat::layouts.error', ['errors' => $errors])
+    @include('wechat::layout.message', ['errors' => $errors])
     <section class="content-header">
 
         <!-- SELECT2 EXAMPLE -->
