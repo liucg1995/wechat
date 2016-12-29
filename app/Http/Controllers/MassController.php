@@ -30,17 +30,9 @@ class MassController extends CommonController
 
     public function __construct(Request $request)
     {
-//        $options = config("app.options");
-//        $app = new Application($options);
-//        $wechat = app('wechat');
-//        $wechatToken = new WechatToken();
-//        $accessToken = new AccessToken(config('app.wechatAppid'), config('app.wechatSecret'), $wechatToken);
-//        $accessToken->prefix = config('app.redisKey.wechatToken');
-//        $wechat['access_token'] = $accessToken;
-//        $this->wechat = $wechat;
 
-        $options=config("app.options");
-        $wechat=new Application($options);
+
+        $wechat=  $this->wechat();
         $this->wechat = $wechat;
 
         switch ($request->select) {

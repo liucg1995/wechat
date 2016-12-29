@@ -19,4 +19,10 @@ class CommonController extends Controller
     {
 //        $this->middleware('auth');
     }
+
+    public function wechat()
+    {
+        $options=config("wxconfig.options");
+        return new Application($options);
+    }
 }

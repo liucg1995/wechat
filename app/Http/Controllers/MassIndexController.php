@@ -21,14 +21,7 @@ class MassIndexController extends CommonController
 
     public function __construct(Request $request)
     {
-//        $wechat = app('wechat');
-//        $wechatToken = new WechatToken();
-//        $accessToken = new AccessToken(config('app.wechatAppid'), config('app.wechatSecret'), $wechatToken);
-//        $accessToken->prefix = config('app.redisKey.wechatToken');
-//        $wechat['access_token'] = $accessToken;
-//        $this->wechat = $wechat;
-        $options=config("app.options");
-        $wechat=new Application($options);
+        $wechat=  $this->wechat();
         $this->wechat = $wechat;
     }
 
@@ -39,7 +32,6 @@ class MassIndexController extends CommonController
      */
     public function massIndex(Request $request)
     {
-//        echo config("wechat-config.extends");
         $masslog = new MassLog;
         $resultData = $masslog->where('way','1')->orderBy('id', 'desc')->paginate(20);
         $result = $resultData->toArray();

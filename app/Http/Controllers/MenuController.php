@@ -23,13 +23,8 @@ class MenuController extends CommonController
 
     public function __construct()
     {
-//        $wechat = app('wechat');
-//        $wechatToken = new WechatToken();
-//        $accessToken = new AccessToken(config('app.wechatAppid'), config('app.wechatSecret'), $wechatToken);
-//        $accessToken->prefix = config('app.redisKey.wechatToken');
-//        $wechat['access_token'] = $accessToken;
-        $options=config("app.options");
-        $wechat=new Application($options);
+
+        $wechat=  $this->wechat();
         $this->wechat = $wechat;
     }
 

@@ -8,15 +8,14 @@ use EasyWeChat\Foundation\Application;
 use Redirect, Input, Response;
 class UploadController extends  CommonController
 {
+    /**
+     * @param Request $request
+     * @return array
+     * ajax 上传图片
+     */
 
-    public  function  imgUploads(){
-        echo 1111;
-    }
-
-    //Ajax上传图片
     public function imgUpload(Request $request)
     {
-//        dd("asaa");
         $file = $request->file('file');
         $id = $request->id;
         $allowed_extensions = ["png", "jpg", "gif"];
@@ -24,12 +23,11 @@ class UploadController extends  CommonController
             return ['error' => 'You may only upload png, jpg or gif.'];
         }
 
-        $destinationPath = 'upload/images/';
+        $destinationPath = config("wxconfig.upload");
         $extension = $file->getClientOriginalExtension();
         $fileName = str_random(10).'.'.$extension;
         $file->move($destinationPath, $fileName);
-        $options = config("app.options");
-        $app = new Application($options);
+        $app =    $this->wechat();
         $temporary = $app->material_temporary;
         $result = $temporary->uploadImage($destinationPath.'/'.$fileName);
         $array = json_decode($result,true);
