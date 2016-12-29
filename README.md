@@ -14,11 +14,13 @@ https://github.com/Askedio/Laravel-Vendor-Package
 
 # Installation
 
-composer require guo/file "dev-master"
+composer require guo/wechat:dev-master
 
 ## Register with config/app.php
 Register the service providers to enable the package:
 ```
-Guo\File\Providers\AppServiceProvider::class,
+Overtrue\LaravelWechat\ServiceProvider::class,
+Guo\Wechat\Providers\AppServiceProvider::class,
+Collective\Html\HtmlServiceProvider::class,
 ```
 
