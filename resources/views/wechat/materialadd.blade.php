@@ -1,29 +1,32 @@
 @extends(config("wxconfig.extends"))
 
 @section('content')
-<script src="/static/js/bootstrap-tokenfield.js"></script>
-<script type="text/javascript" src="/static/js/jquery.ui.widget.js"></script>
-<script type="text/javascript" src="/static/js/jquery.iframe-transport.js"></script>
-<script type="text/javascript" src="/static/js/jquery.fileupload.js"></script>
-<script type="text/javascript" src="/static/js/jquery.fileupload-ui.js"></script>
-<script type="text/javascript" src="/static/js/jquery.fileupload-jquery-ui.js"></script>
-<script type="text/javascript" src="/static/js/load-image.min.js"></script>
-<script type="text/javascript" src="/static/js/jquery.fileupload-process.js"></script>
-<script type="text/javascript" src="/static/js/jquery.fileupload-image.js"></script>
-<script type="text/javascript" src="/static/js/jquery.fileupload-audio.js"></script>
-<script type="text/javascript" src="/static/js/jquery.fileupload-video.js"></script>
-<script type="text/javascript" src="/static/js/jquery.fileupload-validate.js"></script>
-<script type="text/javascript" src="/static/js/jquery.serialize-object.min.js"></script>
+<script src="/assets/js/bootstrap-tokenfield.js"></script>
+<script type="text/javascript" src="/assets/js/jquery.ui.widget.js"></script>
+<script type="text/javascript" src="/assets/js/jquery.iframe-transport.js"></script>
+<script type="text/javascript" src="/assets/js/jquery.fileupload.js"></script>
+<script type="text/javascript" src="/assets/js/jquery.fileupload-ui.js"></script>
+<script type="text/javascript" src="/assets/js/jquery.fileupload-jquery-ui.js"></script>
+<script type="text/javascript" src="/assets/js/load-image.min.js"></script>
+<script type="text/javascript" src="/assets/js/jquery.fileupload-process.js"></script>
+<script type="text/javascript" src="/assets/js/jquery.fileupload-image.js"></script>
+<script type="text/javascript" src="/assets/js/jquery.fileupload-audio.js"></script>
+<script type="text/javascript" src="/assets/js/jquery.fileupload-video.js"></script>
+<script type="text/javascript" src="/assets/js/jquery.fileupload-validate.js"></script>
+<script type="text/javascript" src="/assets/js/jquery.serialize-object.min.js"></script>
+<script>
+    var _token='{{ csrf_token() }}';
+</script>
 
-<script src="/static/js/underscore-min.js"></script>
-<script src="/static/js/chart.min.js"></script>
-<!--<script type="text/javascript" src="/static/js/app.js?<?php echo time() ?>"></script>-->
-<script src="/static/js/base.js?<?php echo time() ?>"></script>
-<script type="text/javascript" src="/static/js/base.js"></script>
+<script src="/assets/js/underscore-min.js"></script>
+<script src="/assets/js/chart.min.js"></script>
+<!--<script type="text/javascript" src="/assets/js/app.js?<?php echo time() ?>"></script>-->
+<script src="/assets/js/base.js?<?php echo time() ?>"></script>
+<script type="text/javascript" src="/assets/js/base.js"></script>
 <!-- 配置文件 -->
-<script type="text/javascript" src="/static/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="/assets/ueditor/ueditor.config.js"></script>
 <!-- 编辑器源码文件 -->
-<script type="text/javascript" src="/static/ueditor/ueditor.all.min.js"></script>
+<script type="text/javascript" src="/assets/ueditor/ueditor.all.min.js"></script>
 
 <p>
 <div class="row">
@@ -53,7 +56,7 @@
 
         <div class="table-responsive">
             <!-- Tab panes -->
-            <!--<div class="text-center" id="loading"><img src="/static/images/wechat/loading.gif" width="40"></div>-->
+            <!--<div class="text-center" id="loading"><img src="/assets/images/wechat/loading.gif" width="40"></div>-->
             <div class="tab-content">
                 <div class="tab-pane" id="mixed">
                     <div class="panel panel-default">
