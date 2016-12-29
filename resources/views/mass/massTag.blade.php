@@ -76,8 +76,8 @@
                                 <label class="col-md-2 control-label">缩略图</label>
                                 <div class="col-md-4 thumb-wrap">
                                     <div class="pic-upload btn btn-block btn-info btn-flat" title="点击上传">点击上传</div>
-                                    <img id="logo" src="">
-                                    <input type="hidden" name="logo" value="">
+                                    <img id="logo" class="pic"  src="">
+                                    <input type="hidden" name="logo" class="picvalue" value="">
                                 </div>
                             </div>
                             <div class="form-group col-sm-12" style="padding-left: 0">

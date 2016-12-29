@@ -67,16 +67,16 @@
     })
 
     var imgSrc = $('.pic-upload').next().attr('src');
-    console.log(imgSrc);
     if(imgSrc == ''){
         $('.pic-upload').next().css('display','none');
     }
     $('.pic-upload').on('click',function(){
-        $('.upload-mask').show();
-        $('.upload-file').show();
-        console.log($(this).next().attr('id'));
-        var imgID = $(this).next().attr('id');
-        $('#imgID').attr('value',imgID);
+//        $('.upload-mask').show();
+//        $('.upload-file').show();
+//        var imgID = $(this).next().attr('id');
+//        $('#imgID').attr('value',imgID);
+
+        $("#thumb").click();
     })
 
 
@@ -107,9 +107,10 @@
             $('.pic-upload').next().css('display','block');
 
             console.log(response.pic);
+            console.log(response.id);
 
-            $("#"+response.id).attr('src',response.pic);
-            $("#"+response.id).next().attr('value',response.pic);
+            $(".pic").attr('src',response.pic);
+            $(".picvalue").val(response.pic);
        
             $("#media_id").val(response.media_id);
         } else {
