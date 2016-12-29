@@ -88,7 +88,7 @@ class WechatController extends CommonController
     public function setRule()
     {
         $r = $this->request;
-$arr=$r->toArray();
+        $arr=$r->toArray();
         $validator=Validator::make($arr, [
             'keyword' => 'required|string',
             'cate_id' => 'required|integer',
