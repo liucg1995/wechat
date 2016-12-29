@@ -32,7 +32,7 @@ class WechatController extends Controller
 
     public function rule()
     {
-        $textType = config('app.mediaType.text');
+        $textType = config('wxconfig.mediaType.text');
 
         //规则列表数据准备
         $rules = Rule::orderBy('id', 'desc')->paginate(15);
@@ -74,7 +74,7 @@ class WechatController extends Controller
         }
 
         //模版
-        return view('wechat.rule', [
+        return view('wechat::wechat.rule', [
             'rules' => $rules,
             'cates' => $cates,
             'id' => $id,
@@ -100,7 +100,7 @@ class WechatController extends Controller
         $dbDR = 0;
         if (!empty($ruleRepeat)) {
             //不能与系统关键词冲突
-            $ruleId = config('app.ruleId');
+            $ruleId = config('wxconfig.ruleId');
             if (in_array($ruleRepeat->id, $ruleId)) {
                 return redirect('wechat/rule')->withErrors(array(
                     '输入关键词与系统保留关键词冲突:' . array_search($ruleRepeat->id, $ruleId)
@@ -171,8 +171,8 @@ class WechatController extends Controller
 
     public function command()
     {
-        $cid = config('app.ruleId.command');
-        $commandType = config('app.mediaType.command');
+        $cid = config('wxconfig.ruleId.command');
+        $commandType = config('wxconfig.mediaType.command');
 
         $command = Rule::find($cid);
         if (empty($command)) {
@@ -180,7 +180,7 @@ class WechatController extends Controller
         }
 
         //模版
-        return view('wechat.command', [
+        return view('wechat::wechat.command', [
             'command' => $command,
             'cid' => $cid,
             'commandType' => $commandType
@@ -189,8 +189,8 @@ class WechatController extends Controller
 
     public function setCommand()
     {
-        $cid = config('app.ruleId.command');
-        $commandType = config('app.mediaType.command');
+        $cid = config('wxconfig.ruleId.command');
+        $commandType = config('wxconfig.mediaType.command');
         $r = $this->request;
 
         $command = Rule::find($cid);
@@ -214,11 +214,11 @@ class WechatController extends Controller
 
     public function follow()
     {
-        $id = config('app.ruleId.follow');
-        $type = config('app.mediaType.text');
+        $id = config('wxconfig.ruleId.follow');
+        $type = config('wxconfig.mediaType.text');
 
         //关注回复,关键词默认为follow
-        $text = config('app.keyword.follow');
+        $text = config('wxconfig.keyword.follow');
 
         $data = Rule::find($id);
         if (empty($data)) {
@@ -240,7 +240,7 @@ class WechatController extends Controller
         }
 
         //模版
-        return view('wechat.follow', [
+        return view('wechat::wechat.follow', [
             'data' => $data,
             'id' => $id,
             'type' => $type,
@@ -252,9 +252,9 @@ class WechatController extends Controller
     {
         $r = $this->request;
 
-        $id = config('app.ruleId.follow');
-        $type = config('app.mediaType.text');
-        $keyword = config('app.keyword.follow');
+        $id = config('wxconfig.ruleId.follow');
+        $type = config('wxconfig.mediaType.text');
+        $keyword = config('wxconfig.keyword.follow');
 
         $rule = Rule::find($id);
         if (empty($rule)) {
@@ -278,11 +278,11 @@ class WechatController extends Controller
 
     public function gain()
     {
-        $id = config('app.ruleId.gain');
-        $type = config('app.mediaType.text');
+        $id = config('wxconfig.ruleId.gain');
+        $type = config('wxconfig.mediaType.text');
 
         //关键词为"投票口令"
-        $text = config('app.keyword.gain');
+        $text = config('wxconfig.keyword.gain');
 
         $data = Rule::find($id);
         if (empty($data)) {
@@ -297,10 +297,10 @@ class WechatController extends Controller
         }
 
         //当前口令
-        $command = Rule::find(config('app.ruleId.command'));
+        $command = Rule::find(config('wxconfig.ruleId.command'));
 
         //模版
-        return view('wechat.gain', [
+        return view('wechat::wechat.gain', [
             'data' => $data,
             'id' => $id,
             'type' => $type,
@@ -314,9 +314,9 @@ class WechatController extends Controller
     {
         $r = $this->request;
 
-        $id = config('app.ruleId.gain');
-        $type = config('app.mediaType.text');
-        $keyword = config('app.keyword.gain');
+        $id = config('wxconfig.ruleId.gain');
+        $type = config('wxconfig.mediaType.text');
+        $keyword = config('wxconfig.keyword.gain');
 
         $rule = Rule::find($id);
         if (empty($rule)) {
@@ -336,13 +336,13 @@ class WechatController extends Controller
 
     function menu()
     {
-        $menu = Redis::GET(config('app.redisKey.wechatMenu'));
+        $menu = Redis::GET(config('wxconfig.redisKey.wechatMenu'));
         $data = json_encode(array());
         if ($menu != null) {
             $data = $menu;
         }
 
-        return view('wechat.menu', [
+        return view('wechat::wechat.menu', [
             'data' => $data
         ]);
     }
@@ -350,12 +350,12 @@ class WechatController extends Controller
     function setMenu()
     {
         $r = $this->request;
-        $redisR = Redis::set(config('app.redisKey.wechatMenu'), urldecode($r->data));
+        $redisR = Redis::set(config('wxconfig.redisKey.wechatMenu'), urldecode($r->data));
 
         $wechat = app('wechat');
         $wechatToken = new WechatToken();
-        $accessToken = new AccessToken(config('app.wechatAppid'), config('app.wechatSecret'), $wechatToken);
-        $accessToken->prefix = config('app.redisKey.wechatToken');
+        $accessToken = new AccessToken(config('wxconfig.wechatAppid'), config('wxconfig.wechatSecret'), $wechatToken);
+        $accessToken->prefix = config('wxconfig.redisKey.wechatToken');
         $wechat['access_token'] = $accessToken;
 
         $data = json_decode(urldecode($r->data), true);
@@ -374,7 +374,7 @@ class WechatController extends Controller
         $result = $result['data'];
         //$url = url('news/') . '/';
         //return view('material.material')->withArticles(\App\Article::all());
-        return view('wechat.material', [
+        return view('wechat::wechat.material', [
             'materials' => $result,
             'materialData' => $resultData,
         ]);
@@ -388,7 +388,7 @@ class WechatController extends Controller
         $resultData = $material->where('id', $id)->get();
         $result = $resultData->toArray();
         $result[0]['created'] = date('Y-m-d H:i:s', time());
-        return view('wechat.materialedit', [
+        return view('wechat::wechat.materialedit', [
             'material' => $result[0]
         ]);
     }
@@ -425,8 +425,8 @@ class WechatController extends Controller
         // $material->ORurl = '';
         // $material->num = '';
         // $material->assist = '';
-        $emotions = config('app.emotions');
-        return view('wechat.materialadd', [
+        $emotions = config('wxconfig.emotions');
+        return view('wechat::wechat.materialadd', [
             'emotions' => json_encode($emotions)
         ]);
 
@@ -443,7 +443,7 @@ class WechatController extends Controller
 
     public function upload()
     {
-        new \App\Services\UploadHandler();
+        new \Guo\Wechat\Model\UploadHandler();
 
     }
 }

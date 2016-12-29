@@ -29,6 +29,16 @@ Route::group(['namespace' => '\Guo\Wechat\Http\Controllers'], function(){
     Route::get('/massage/index', 'MassIndexController@massIndex');//正式
     Route::get('/massage/test', 'MassIndexController@massTestIndex');//测试
     Route::any('/upload_img', 'UploadController@imgUpload');
+    //添加素材
+    Route::get('/wechat/material', 'WechatController@materialIndex');
+    Route::get('/wechat/materialedit', 'WechatController@materialEdit');
+    Route::post('/wechat/materialupdate', 'WechatController@materialUpdate');
+    Route::get('/wechat/materialadd', 'WechatController@materialAdd');
+    Route::any('/wechat/upload', 'WechatController@upload');
+    Route::any('/media', 'MediaController@index');
+    Route::any('/media/upload', 'MediaController@upload');
+    Route::any('/media/json', 'MediaController@json');
+    Route::any('/media/delete', 'MediaController@delete');
     Route::any('/aa', function (){
         echo 'aaa';
     });
