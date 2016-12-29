@@ -347,7 +347,7 @@ MMEditor.prototype.save = function(button) {
             url: '/media',
             type: 'POST',
             dataType: 'json',
-            data: {data: self.data, media_type:2, is_edit:self.is_edit, bundle_id:self.bundle_id}
+            data: {data: self.data, media_type:2, is_edit:self.is_edit, bundle_id:self.bundle_id,_token:_token}
         })
         .done(function() {
             //console.log("success");

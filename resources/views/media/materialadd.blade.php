@@ -14,7 +14,9 @@
     <script type="text/javascript" src="/assets/js/jquery.fileupload-video.js"></script>
     <script type="text/javascript" src="/assets/js/jquery.fileupload-validate.js"></script>
     <script type="text/javascript" src="/assets/js/jquery.serialize-object.min.js"></script>
-
+    <script>
+        var _token='{{ csrf_token() }}';
+    </script>
     <script src="/assets/js/underscore-min.js"></script>
     <script src="/assets/js/chart.min.js"></script>
     <!--<script type="text/javascript" src="/assets/js/app.js?<?php echo time() ?>"></script>-->
