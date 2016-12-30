@@ -23,4 +23,11 @@ Overtrue\LaravelWechat\ServiceProvider::class,
 Guo\Wechat\Providers\AppServiceProvider::class,
 Collective\Html\HtmlServiceProvider::class,
 ```
+```
+'Form' => Collective\Html\FormFacade::class,
+'Html' => Collective\Html\HtmlFacade::class,
+```
+
+执行php命令
+php artisan  vendor:publish
 
