@@ -383,7 +383,7 @@ class MassController extends CommonController
 
             $broadcast = $wechat->broadcast; //var_dump($openId);die;
             // TEXT别名方式    
-            $sendResult = $broadcast->sendImage("q6fAEdujZsx5yAIEHWlchwqsHIRpLDnlqMt7z42CDB1T-zJeaA2E6bOr8P7VOAol", ['oM_3EwN6_yCCouHlijLLM5-wVhnk','oM_3EwJ3pwm3gWDLhDe7RE1dI4SA']);//var_dump($sendResult);die;
+            $sendResult = $broadcast->previewImage($mediaId, $openId);//var_dump($sendResult);die;
             $msgId = '测试无消息id';
 
             if ($sendResult->errcode == 0) {

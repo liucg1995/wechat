@@ -36,3 +36,13 @@ php artisan  vendor:publish
  "wechat/materialadd",'wechat/upload','media/upload',"/api/wechat"
 ```
 
+## 微信所需链接
+```
+/api/wechat     微信响应接口
+/media          素材管理
+/wechat/menu    自定义菜单
+/message/test   测试群发
+/message/index  正式群发
+
+```
+
