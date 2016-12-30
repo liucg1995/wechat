@@ -19,8 +19,18 @@ Route::group(['namespace' => '\Guo\Wechat\Http\Controllers'], function(){
     Route::get('file', 'HomeController@getcontent');
     Route::get('delfile', 'HomeController@delfile');
     Route::get('test', 'HomeController@test');
+    //微信接口
+    Route::any('/api/wechat', 'Api\WechatController@api');
     //详情页
     Route::get('/m/{id}', 'WxmediaController@media_detail')->where('id', '[0-9]+');
+    Route::get('/m/update', "WxmediaController@update");
+    Route::get('/m/complainttort', 'WxmediaController@tort');
+    //投诉
+    Route::get('/m/complainttext', "WxmediaController@complainttext");
+    Route::get('/m/complainttextcommit', "WxmediaController@complainttextcommit");
+    Route::get('/m/complaint', "WxmediaController@complaint");
+    Route::get('/m/complaintcopy', "WxmediaController@complaintcopy");
+    Route::get('/m/qrcode', "WxmediaController@qrcode");
     //模板消息
     Route::get('ad_wechat/template/index', "TemplateController@index");
     //菜单管理
