@@ -1,4 +1,4 @@
-@extends(config("wxconfig.extends"))
+@extends(config("wechat-config.extends"))
 @section('content')
     <section class="content-header">
         <h1>

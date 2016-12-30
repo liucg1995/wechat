@@ -189,6 +189,7 @@ class MediaController extends CommonController
                 if ($insert_id > 0) {
                     $file_path = public_path($url['path']);
                     try {
+
                         // 永久素材
                         $app_material = $this->wechat->material;
                         $result = $app_material->uploadImage($file_path);  // 请使用绝对路径写法！除非你正确的理解了相对路径（好多人是没理解对的）！
@@ -204,7 +205,10 @@ class MediaController extends CommonController
                             'source_url' => $material->ORurl
                         ]);
                         $mixde_result = $app_material->uploadArticle($article);
+                       echo sprintf(config('wxconfig.redisKey.KEY_WEIXIN_MIXED'), $insert_id);
                         Redis::set(sprintf(config('wxconfig.redisKey.KEY_WEIXIN_MIXED'), $insert_id), $mixde_result->media_id);
+                       echo Redis::get(sprintf(config('wxconfig.redisKey.KEY_WEIXIN_MIXED'), $insert_id));
+                    dd($insert_id,$mixde_result);
                     } catch (Exception $e) {
 
                     }
@@ -349,7 +353,6 @@ class MediaController extends CommonController
 
                 $file_path = public_path($url['path']);
                 try {
-
 //                    $options = config("app.options");
 //                    $app = new Application($options);
                     // 永久素材

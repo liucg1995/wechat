@@ -19,7 +19,8 @@ Route::group(['namespace' => '\Guo\Wechat\Http\Controllers'], function(){
     Route::get('file', 'HomeController@getcontent');
     Route::get('delfile', 'HomeController@delfile');
     Route::get('test', 'HomeController@test');
-
+    //详情页
+    Route::get('/m/{id}', 'WxmediaController@media_detail')->where('id', '[0-9]+');
     //模板消息
     Route::get('ad_wechat/template/index', "TemplateController@index");
     //菜单管理
