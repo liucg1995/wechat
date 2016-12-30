@@ -26,8 +26,8 @@ Route::group(['namespace' => '\Guo\Wechat\Http\Controllers'], function(){
     Route::any('wechat/menu', "MenuController@index");
     Route::any('wechat/setMenu', "MenuController@setMenu");
     //模板
-    Route::get('/massage/index', 'MassIndexController@massIndex');//正式
-    Route::get('/massage/test', 'MassIndexController@massTestIndex');//测试
+    Route::get('/message/index', 'MassIndexController@massIndex');//正式
+    Route::get('/message/test', 'MassIndexController@massTestIndex');//测试
     Route::any('/upload_img', 'UploadController@imgUpload');
     //添加素材
     Route::get('/wechat/material', 'WechatController@materialIndex');
