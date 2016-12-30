@@ -20,19 +20,19 @@ class Rule extends Model
 
     public static function getRule($keyword)
     {
-        $redisKey = config('app.redisKey.reply') . sprintf(self::KEY_KEYWORD, md5($keyword));
+        $redisKey = config('wxconfig.redisKey.reply') . sprintf(self::KEY_KEYWORD, md5($keyword));
         return Redis::HGETALL($redisKey);
     }
 
     public static function setRule($keyword, array $data = [])
     {
-        $redisKey = config('app.redisKey.reply') . sprintf(self::KEY_KEYWORD, md5($keyword));
+        $redisKey = config('wxconfig.redisKey.reply') . sprintf(self::KEY_KEYWORD, md5($keyword));
         return Redis::hmset($redisKey, $data);
     }
 
     public static function delRule($keyword)
     {
-        $redisKey = config('app.redisKey.reply') . sprintf(self::KEY_KEYWORD, md5($keyword));
+        $redisKey = config('wxconfig.redisKey.reply') . sprintf(self::KEY_KEYWORD, md5($keyword));
         return Redis::expire($redisKey, 1);
     }
 }

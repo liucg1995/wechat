@@ -40,8 +40,8 @@ class MediaController extends CommonController
         $this->request = $request;
 //        $wechat = app('wechat');
 //        $wechatToken = new WechatToken();
-//        $accessToken = new AccessToken(config('app.wechatAppid'), config('app.wechatSecret'), $wechatToken);
-//        $accessToken->prefix = config('app.redisKey.wechatToken');
+//        $accessToken = new AccessToken(config('wxconfig.wechatAppid'), config('wxconfig.wechatSecret'), $wechatToken);
+//        $accessToken->prefix = config('wxconfig.redisKey.wechatToken');
 //        $wechat['access_token'] = $accessToken;
         $this->wechat = $this->wechat();
     }
@@ -142,7 +142,7 @@ class MediaController extends CommonController
                         // 永久素材
                         $material = $this->wechat->material;
                         $result = $material->uploadImage($file_path);  // 请使用绝对路径写法！除非你正确的理解了相对路径（好多人是没理解对的）！
-                        Redis::set(sprintf(config('app.redisKey.KEY_WEIXIN_MEDIA'), $insert_id), $result['media_id']);
+                        Redis::set(sprintf(config('wxconfig.redisKey.KEY_WEIXIN_MEDIA'), $insert_id), $result['media_id']);
                     } catch (Exception $e) {
 
                     }
@@ -192,7 +192,7 @@ class MediaController extends CommonController
                         // 永久素材
                         $app_material = $this->wechat->material;
                         $result = $app_material->uploadImage($file_path);  // 请使用绝对路径写法！除非你正确的理解了相对路径（好多人是没理解对的）！
-                        Redis::set(sprintf(config('app.redisKey.KEY_WEIXIN_MEDIA'), $insert_id), $result['media_id']);
+                        Redis::set(sprintf(config('wxconfig.redisKey.KEY_WEIXIN_MEDIA'), $insert_id), $result['media_id']);
                         //添加永久但图文素材
                         $article = new Article([
                             'title' => $title,
@@ -204,7 +204,7 @@ class MediaController extends CommonController
                             'source_url' => $material->ORurl
                         ]);
                         $mixde_result = $app_material->uploadArticle($article);
-                        Redis::set(sprintf(config('app.redisKey.KEY_WEIXIN_MIXED'), $insert_id), $mixde_result->media_id);
+                        Redis::set(sprintf(config('wxconfig.redisKey.KEY_WEIXIN_MIXED'), $insert_id), $mixde_result->media_id);
                     } catch (Exception $e) {
 
                     }
@@ -266,7 +266,7 @@ class MediaController extends CommonController
                         try {
 
                             $result = $app_material->uploadImage($file_path);  // 请使用绝对路径写法！除非你正确的理解了相对路径（好多人是没理解对的）！
-                            Redis::set(sprintf(config('app.redisKey.KEY_WEIXIN_MEDIA'), $insert_id), $result['media_id']);
+                            Redis::set(sprintf(config('wxconfig.redisKey.KEY_WEIXIN_MEDIA'), $insert_id), $result['media_id']);
                             //添加永久但图文素材
                             $article = new Article([
                                 'title' => $title,
@@ -284,7 +284,7 @@ class MediaController extends CommonController
                     }
                 }
                 $mixde_result = $app_material->uploadArticle($articles);
-                Redis::set(sprintf(config('app.redisKey.KEY_WEIXIN_MIXED_MULTI'), $bid), $mixde_result->media_id);
+                Redis::set(sprintf(config('wxconfig.redisKey.KEY_WEIXIN_MIXED_MULTI'), $bid), $mixde_result->media_id);
                 echo json_encode(array());
                 exit;
                 break;
@@ -349,12 +349,13 @@ class MediaController extends CommonController
 
                 $file_path = public_path($url['path']);
                 try {
+
 //                    $options = config("app.options");
 //                    $app = new Application($options);
                     // 永久素材
                     $material = $this->wechat->material;
                     $result = $material->uploadImage($file_path);  // 请使用绝对路径写法！除非你正确的理解了相对路径（好多人是没理解对的）！
-                    Redis::set(sprintf(config('app.redisKey.KEY_WEIXIN_MEDIA'), $id), $result['media_id']);
+                    Redis::set(sprintf(config('wxconfig.redisKey.KEY_WEIXIN_MEDIA'), $id), $result['media_id']);
                 } catch (Exception $e) {
 
                 }
@@ -402,7 +403,7 @@ class MediaController extends CommonController
                 try {
 
                     $result = $app_material->uploadImage($file_path);  // 请使用绝对路径写法！除非你正确的理解了相对路径（好多人是没理解对的）！
-                    Redis::set(sprintf(config('app.redisKey.KEY_WEIXIN_MEDIA'), $id), $result['media_id']);
+                    Redis::set(sprintf(config('wxconfig.redisKey.KEY_WEIXIN_MEDIA'), $id), $result['media_id']);
                     //添加永久但图文素材
                     $article = new Article([
                         'title' => $title,
@@ -413,10 +414,10 @@ class MediaController extends CommonController
                         'content' => $content,
                         'source_url' => $material->ORurl
                     ]);
-                    $mediaId = Redis::GET(sprintf(config('app.redisKey.KEY_WEIXIN_MIXED'), $id));
+                    $mediaId = Redis::GET(sprintf(config('wxconfig.redisKey.KEY_WEIXIN_MIXED'), $id));
                     if ($mediaId) {
                         $mixde_result = $app_material->updateArticle($mediaId, $article);
-                        //Redis::set(sprintf(config('app.redisKey.KEY_WEIXIN_MIXED'), $id), $mixde_result->media_id);
+                        //Redis::set(sprintf(config('wxconfig.redisKey.KEY_WEIXIN_MIXED'), $id), $mixde_result->media_id);
                     }
 
                 } catch (Exception $e) {
@@ -479,7 +480,7 @@ class MediaController extends CommonController
                     try {
 
                         $result = $app_material->uploadImage($file_path);  // 请使用绝对路径写法！除非你正确的理解了相对路径（好多人是没理解对的）！
-                        Redis::set(sprintf(config('app.redisKey.KEY_WEIXIN_MEDIA'), $id), $result['media_id']);
+                        Redis::set(sprintf(config('wxconfig.redisKey.KEY_WEIXIN_MEDIA'), $id), $result['media_id']);
                         //添加永久但图文素材
                         $article = new Article([
                             'title' => $title,
@@ -490,7 +491,7 @@ class MediaController extends CommonController
                             'content' => $content,
                             'source_url' => $material->ORurl
                         ]);
-                        $mediaId = Redis::GET(sprintf(config('app.redisKey.KEY_WEIXIN_MIXED_MULTI'), $bundle_id));
+                        $mediaId = Redis::GET(sprintf(config('wxconfig.redisKey.KEY_WEIXIN_MIXED_MULTI'), $bundle_id));
                         if ($mediaId) {
                             $app_material->updateArticle($mediaId, $article, $multi_order);
                         }

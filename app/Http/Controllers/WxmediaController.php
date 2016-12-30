@@ -1,15 +1,12 @@
 <?php
 namespace Guo\Wechat\Http\Controllers;
 
-use App\Media;
-use App\Complaint;
-use App\Model\Link;
-use Illuminate\Routing\Controller;
+use Guo\Wechat\Model\Media;
+use Guo\Wechat\Model\Complaint;
+use Guo\Wechat\Model\Link;
 use Illuminate\Http\Request;
 use EasyWeChat\Core\Exception;
-//use EasyWeChat\Foundation\Application;
-use App\WechatToken;
-use EasyWeChat\Core\AccessToken;
+use WechatToken;
 
 class WxmediaController extends CommonController
 {
@@ -18,13 +15,13 @@ class WxmediaController extends CommonController
 
     public function __construct()
     {
-        $wechat = $this->wechat(0);
+        $wechat = $this->wechat();
         $this->wechat = $wechat;
-        if (!isset($_SESSION['is_base'])) {
-            $_SESSION["target_urls"] = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-            header('location: /auth/base');
-            exit;
-        }
+//        if (!isset($_SESSION['is_base'])) {
+//            $_SESSION["target_urls"] = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+//            header('location: /auth/base');
+//            exit;
+//        }
     }
 
     /**
