@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace  Guo\Wechat\Http\Controllers\Api;
 
 use Guo\Wechat\Model\Rule;
 use Guo\Wechat\Model\Media;
