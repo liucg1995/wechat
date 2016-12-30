@@ -194,7 +194,7 @@ class WechatController extends Controller
                     break;
                 case MEDIA_TYPE_IMAGE:
                     $msg_type = 'image';
-                    $wx_media_id = Redis::GET(sprintf(config('app.redisKey.KEY_WEIXIN_MEDIA'), $r['mid']));
+                    $wx_media_id = Redis::GET(sprintf(config('wxconfig.redisKey.KEY_WEIXIN_MEDIA'), $r['mid']));
                     $save_content = $content = new Image(['media_id' => $wx_media_id]);
                     break;
                 case MEDIA_TYPE_AUDIO:
