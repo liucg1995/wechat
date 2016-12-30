@@ -28,6 +28,11 @@ Collective\Html\HtmlServiceProvider::class,
 'Html' => Collective\Html\HtmlFacade::class,
 ```
 
-执行php命令
+##  执行php命令
 php artisan  vendor:publish
+
+## Update  app\Http\Middleware\VerifyCsrfToken.php
+```
+ "wechat/materialadd",'wechat/upload','media/upload',"/api/wechat"
+```
 
