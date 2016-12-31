@@ -11,6 +11,7 @@
 |
 */
 Route::group(['middleware' => ['web']], function(){
+    Route::group(['prefix' => config("wxconfig.prefix")], function(){
 Route::group(['namespace' => '\Guo\Wechat\Http\Controllers'], function(){
 
     Route::get('filelist', 'HomeController@filelist');
@@ -78,6 +79,7 @@ Route::group(['namespace' => '\Guo\Wechat\Http\Controllers'], function(){
         Route::post('/pretemplate', 'MassController@pretemplate');//模板消息
         Route::post('/precustomer', 'MassController@precustomer');//客服消息
     });
+});
 });
 });
 

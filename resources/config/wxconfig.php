@@ -9,6 +9,10 @@
 
 return [
     /*
+     *路由前缀
+     */
+    "prefix"=>"",
+    /*
      * 模板继承的路径
      */
     'extends'=>'layouts.app',
