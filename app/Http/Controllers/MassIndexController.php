@@ -60,7 +60,7 @@ class MassIndexController extends CommonController
             'resultData' => $resultData,
             'medias' => $mediasView,
             'mediaskf' => $mediasViewKf,
-            'url' => '/massf'
+            'url' => '/mass/index'
         ]);
     }
 
@@ -105,7 +105,7 @@ class MassIndexController extends CommonController
             'userID' => $userID,
             'medias' => $mediasView,
             'mediaskf' => $mediasViewKf,
-            'url' => '/masstest'
+            'url' => '/mass/test'
         ]);
     }
 

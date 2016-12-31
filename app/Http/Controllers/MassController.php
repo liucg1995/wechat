@@ -111,7 +111,7 @@ class MassController extends CommonController
             $massLog->contents = $text;
             $massLog->result = '提交成功';
             $massLog->save();
-            return redirect('/mass/index')->with('mgssages', array(0 => '提交成功'));
+            return redirect('/mass/index')->with('messages', array(0 => '提交成功'));
         } else {
             $massLog = new MassLog();
             $massLog->msgId = $msgId;
@@ -121,7 +121,7 @@ class MassController extends CommonController
             $massLog->contents = $text;
             $massLog->result = '提交失败';
             $massLog->save();
-            return redirect('/mass/index')->with('mgssages', array(0 => '提交失败'));
+            return redirect('/mass/index')->with('messages', array(0 => '提交失败'));
         }
 //        $broadcast->sendNews($mediaId, [$openid1, $openid2]);
 //        $broadcast->sendVoice($mediaId, [$openid1, $openid2]);
@@ -184,7 +184,7 @@ class MassController extends CommonController
             $massLog->contents = '临时图片媒体ID：' . $mediaId;
             $massLog->result = '提交成功';
             $massLog->save();
-            return redirect('/mass/index')->with('mgssages', array(0 => '提交成功'));
+            return redirect('/mass/index')->with('messages', array(0 => '提交成功'));
         } else {
             $massLog = new MassLog();
             $massLog->msgId = $msgId;
@@ -194,7 +194,7 @@ class MassController extends CommonController
             $massLog->contents = '临时图片媒体ID：' . $mediaId;
             $massLog->result = '提交失败';
             $massLog->save();
-            return redirect('/mass/index')->with('mgssages', array(0 => '提交失败'));
+            return redirect('/mass/index')->with('messages', array(0 => '提交失败'));
         }
 //        $broadcast->sendNews($mediaId, [$openid1, $openid2]);
 //        $broadcast->sendVoice($mediaId, [$openid1, $openid2]);
@@ -266,7 +266,7 @@ class MassController extends CommonController
             $massLog->contents = $title;
             $massLog->result = '提交成功';
             $massLog->save();
-            return redirect('/mass/index')->with('mgssages', array(0 => '提交成功'));
+            return redirect('/mass/index')->with('messages', array(0 => '提交成功'));
         } else {
             $massLog = new MassLog();
             $massLog->msgId = $msgId;
@@ -276,7 +276,7 @@ class MassController extends CommonController
             $massLog->contents = $title;
             $massLog->result = '提交失败';
             $massLog->save();
-            return redirect('/mass/index')->with('mgssages', array(0 => '提交失败'));
+            return redirect('/mass/index')->with('messages', array(0 => '提交失败'));
         }
 //        $broadcast->sendNews($mediaId, [$openid1, $openid2]);
 //        $broadcast->sendVoice($mediaId, [$openid1, $openid2]);
@@ -332,7 +332,7 @@ class MassController extends CommonController
                 $massLog->contents = $text;
                 $massLog->result = '提交成功';
                 $massLog->save();
-                return redirect('mass/test')->with('mgssages', array(0 => '提交成功'));
+                return redirect('mass/test')->with('messages', array(0 => '提交成功'));
             } else {
                 $massLog = new MassLog();
                 $massLog->number = 1;
@@ -342,7 +342,7 @@ class MassController extends CommonController
                 $massLog->contents = $text;
                 $massLog->result = '提交失败';
                 $massLog->save();
-                return redirect('mass/test')->with('mgssages', array(0 => '提交失败'));
+                return redirect('mass/test')->with('messages', array(0 => '提交失败'));
             }
         }
 
@@ -396,7 +396,7 @@ class MassController extends CommonController
                 $massLog->contents = '临时图片媒体ID：' . $mediaId;
                 $massLog->result = '提交成功';
                 $massLog->save();
-                return redirect('mass/test')->with('mgssages', array(0 => '提交成功'));
+                return redirect('mass/test')->with('messages', array(0 => '提交成功'));
             } else {
                 $massLog = new MassLog();
                 $massLog->number = 1;
@@ -406,7 +406,7 @@ class MassController extends CommonController
                 $massLog->contents = '临时图片媒体ID：' . $mediaId;
                 $massLog->result = '提交失败';
                 $massLog->save();
-                return redirect('mass/test')->with('mgssages', array(0 => '提交失败'));
+                return redirect('mass/test')->with('messages', array(0 => '提交失败'));
             }
         }
     }
@@ -473,7 +473,7 @@ class MassController extends CommonController
                 $massLog->contents = $title;
                 $massLog->result = '提交成功';
                 $massLog->save();
-                return redirect('mass/test')->with('mgssages', array(0 => '提交成功'));
+                return redirect('mass/test')->with('messages', array(0 => '提交成功'));
             } else {
                 $massLog = new MassLog();
                 $massLog->number = 1;
@@ -483,7 +483,7 @@ class MassController extends CommonController
                 $massLog->contents = title;
                 $massLog->result = '提交失败';
                 $massLog->save();
-                return redirect('mass/test')->with('mgssages', array(0 => '提交失败'));
+                return redirect('mass/test')->with('messages', array(0 => '提交失败'));
             }
         }
 
@@ -540,9 +540,9 @@ class MassController extends CommonController
         $massLog->result = $res['errmsg'];
         $massLog->save();
         if ($res['errcode'] == '0') {
-            return redirect()->back()->with('mgssages', array(0 => '提交成功'));
+            return redirect()->back()->with('messages', array(0 => '提交成功'));
         } else {
-            return redirect()->back()->with('mgssages', array(0 => '提交失败', 1 => $res['errmsg']));
+            return redirect()->back()->with('messages', array(0 => '提交失败', 1 => $res['errmsg']));
         }
 
 
@@ -620,9 +620,9 @@ class MassController extends CommonController
         $massLog->result = $res['errmsg'];
         $massLog->save();
         if ($res['errcode'] == '0') {
-            return redirect()->back()->with('mgssages', array(0 => '提交成功'));
+            return redirect()->back()->with('messages', array(0 => '提交成功'));
         } else {
-            return redirect()->back()->with('mgssages', array(0 => '提交失败', 1 => $res['errmsg']));
+            return redirect()->back()->with('messages', array(0 => '提交失败', 1 => $res['errmsg']));
         }
     }
 
@@ -634,11 +634,16 @@ class MassController extends CommonController
         $way = ($request['url'] == '/mass/index') ? '正式客服消息' : '测试客服消息';
         if (isset($request['userId']) && $request['userId'] != '') {
             //客服消息单发 openid
-            $user = UserSns::where('user_id', $request['userId'])->where('status', '0')->get(['openid']);
+            $user =array(
+                array(
+                'openid'=>$request['userId']
+                )
+            );
+            $user = User::get(['openid'])->toarray();
             $receiver = 'userID' . $request['userId'];
         } else {
             //客服消息群发 openid
-            $user = UserSns::where('status', '0')->get(['openid']);
+            $user = User::get(['openid'])->toarray();
             $receiver = '关注且48小时有互动用户';
         }
 
@@ -670,11 +675,11 @@ class MassController extends CommonController
                     $contents = '图片' . $request['media_id'];
                     break;
                 case '4':
-                    return redirect($request['url'])->with('mgssages', array(0 => '发送音频正在开发中'));
+                    return redirect($request['url'])->with('messages', array(0 => '发送音频正在开发中'));
                     //Todo
                     break;
                 case '5':
-                    return redirect($request['url'])->with('mgssages', array(0 => '发送视频正在开发中'));
+                    return redirect($request['url'])->with('messages', array(0 => '发送视频正在开发中'));
                     //Todo
                     break;
                 case '6':
@@ -684,27 +689,15 @@ class MassController extends CommonController
                 default:
                     break;
             }
-        } else {
-            $massLog = new MassLog();
-            $massLog->number = 0;
-            $massLog->msgId = '';
-            $massLog->receiver = $receiver;
-            $massLog->way = $way;
-            $massLog->contents = $contents;
-            $massLog->result = '提交失败';
-            $massLog->save();
-
-            return redirect($request['url'])->with('mgssages', array(0 => '提交失败'));
         }
         //发送客服消息
         $staff = $this->wechat->staff; // 客服管理
         $num = 0;
         foreach ($user as $v) {
             try {
-                if ($staff->message($message)->to($v->openid)->send())
+                if ($staff->message($message)->to($v['openid'])->send())
                     $num++;
             } catch (Exception $e) {
-//                return redirect($request['url'])->with('mgssages', array(0 => '提交失败'));
             }
         }
         $massLog = new MassLog();
@@ -716,7 +709,7 @@ class MassController extends CommonController
         $massLog->result = '提交成功';
         $massLog->save();
 
-        return redirect($request['url'])->with('mgssages', array(0 => '提交成功'));
+        return redirect($request['url'])->with('messages', array(0 => '提交成功'));
     }
 }
 
