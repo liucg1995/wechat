@@ -23,6 +23,7 @@ Overtrue\LaravelWechat\ServiceProvider::class,
 Guo\Wechat\Providers\AppServiceProvider::class,
 Collective\Html\HtmlServiceProvider::class,
 ```
+Register the service aliases to enable the package:
 ```
 'Form' => Collective\Html\FormFacade::class,
 'Html' => Collective\Html\HtmlFacade::class,
@@ -41,8 +42,8 @@ php artisan  vendor:publish
 /api/wechat     微信响应接口
 /media          素材管理
 /wechat/menu    自定义菜单
-/message/test   测试群发
-/message/index  正式群发
+/mass/test   测试群发
+/mass/index  正式群发
 
 ```
 

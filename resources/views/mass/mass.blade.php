@@ -1,6 +1,22 @@
 @extends(config("wxconfig.extends"))
 @section('content')
     @include('wechat::uploadpicture.upload_img')
+    <style>
+        .lable {
+            height: 34px;
+            line-height: 34px;
+            margin-bottom: 0;
+            padding-left: 0px
+        }
+
+        .right-lable {
+            height: 34px;
+            line-height: 34px;
+            margin-bottom: 0;
+            padding-left: 0px;
+            text-align: right;
+        }
+    </style>
     <script src="http://malsup.github.io/jquery.form.js"></script>
     @include('wechat::layout.message')
     <link rel="stylesheet" href="{{url("/bower_components/AdminLTE/plugins/iCheck/all.css")}}">
@@ -37,7 +53,7 @@
                                            style="height:34px;line-height:34px;margin-bottom: 0;padding-left:0px">OPENID</label>
                                     <div class="col-sm-10">
                                         <input name="userId" type="text" value="{{$userID or old('userId')}}"
-                                               placeholder="请输入<用户管理>中的userID号" class=" form-control" size="30">
+                                               placeholder="请输入openid" class=" form-control" size="30">
                                     </div>
                                 </div>
                             </h3>
@@ -96,7 +112,7 @@
                                                 <div class="pic-upload btn btn-block btn-info btn-flat"
                                                      title="点击上传">点击上传
                                                 </div>
-                                                <img id="logo" class="pic"  src="">
+                                                <img id="logo" class="pic" src="">
                                                 <input type="hidden" name="logo" class="picvalue" value="">
                                             </div>
                                         </div>
@@ -107,8 +123,8 @@
                                                    class="btn btn-primary"/>
                                         </div>
                                         <style>
-                                            #logo{
-                                                width:100%;
+                                            #logo {
+                                                width: 100%;
                                             }
                                         </style>
                                     </div>
@@ -181,56 +197,36 @@
                         <div class="box-body">
                             <div id="example2_wrapper" class="dataTables_wrapper  dt-bootstrap">
                                 <div class="row">
-                                    <div class="col-sm-12">
+                                    <div class="col-sm-12 template">
                                         <div class="box-header with-border box-danger form-group">
-                                            <label class="col-sm-2 control-label"
-                                                   style="height:34px;line-height:34px;margin-bottom: 0;padding-left:0px">点击跳转地址:</label>
+                                            <label class="col-sm-2 control-label lable"
+                                            >点击跳转地址:</label>
                                             <div class="col-sm-10">
                                                 <input name="url" type="url" value="{{$userID or old('url')}}"
                                                        placeholder="请输入点击跳转地址" class=" form-control" required size="30">
                                             </div>
                                         </div>
                                         <div class="box-header with-border box-danger form-group">
-                                            <label class="col-sm-2 control-label"
-                                                   style="height:34px;line-height:34px;margin-bottom: 0;padding-left:0px">小标题:</label>
-                                            <div class="col-sm-10">
-                                                <input name="first" type="text" value="{{$userID or old('first')}}"
-                                                       placeholder="请输入小标题" class=" form-control" required size="30">
+                                            <label class="col-sm-2 control-label right-lable">字段:</label>
+                                            <div class="col-sm-4">
+                                                <input name="key[]" type="text"
+                                                       value=""
+                                                       placeholder="请输入字段" class=" form-control" required size="30">
                                             </div>
-                                        </div>
-                                        <div class="box-header with-border box-danger form-group">
-                                            <label class="col-sm-2 control-label"
-                                                   style="height:34px;line-height:34px;margin-bottom: 0;padding-left:0px">策略名称:</label>
-                                            <div class="col-sm-10">
-                                                <input name="invest_product" type="text"
-                                                       value="{{$userID or old('invest_product')}}"
-                                                       placeholder="请输入策略名称" class=" form-control" required size="30">
+                                            <label class="col-sm-1 control-label right-lable">值:</label>
+                                            <div class="col-sm-4">
+                                                <input name="value[]" type="text" value="" placeholder="请输入数据"
+                                                       class=" form-control" required size="30">
                                             </div>
+                                            <label class="col-sm-1 control-label right-lable"><i class="fa fa-plus-circle btn btn-success btn-md btn-add"></i></label>
                                         </div>
-                                        <div class="box-header with-border box-danger form-group">
-                                            <label class="col-sm-2 control-label"
-                                                   style="height:34px;line-height:34px;margin-bottom: 0;padding-left:0px">操作风格:</label>
-                                            <div class="col-sm-10">
-                                                <input name="invest_style" type="text"
-                                                       value="{{$userID or old('invest_style')}}"
-                                                       placeholder="请输入操作风格" class=" form-control" required size="30">
-                                            </div>
-                                        </div>
-                                        <div class="box-header with-border box-danger form-group">
-                                            <label class="col-sm-2 control-label"
-                                                   style="height:34px;line-height:34px;margin-bottom: 0;padding-left:0px">目前策略收益:</label>
-                                            <div class="col-sm-10">
-                                                <input name="invest_profit" type="text"
-                                                       value="{{$userID or old('invest_profit')}}"
-                                                       placeholder="请输入目前策略收益" class=" form-control" required size="30">
-                                            </div>
-                                        </div>
-                                        <div class="box-header with-border box-danger form-group">
-                                            <label class="col-sm-2 control-label"
+
+                                        <div class="box-header with-border box-danger form-group remark">
+                                            <label class="col-sm-2 control-label lable"
                                                    style="height:34px;line-height:34px;margin-bottom: 0;padding-left:0px">备注:</label>
                                             <div class="col-sm-10">
                                                 <input name="remark" type="text"
-                                                       value="{{$userID or old('remark')}}"
+                                                       value=""
                                                        placeholder="请输入备注" class=" form-control" size="30">
                                             </div>
                                         </div>
@@ -398,6 +394,13 @@
                 $(".pretemplate").hide();
                 $(".precustomer").hide();
                 $("." + type).show();
+            });
+            $(".btn-add").bind("click",function () {
+                console.log('aa');
+                 var  str=' <div class="box-header with-border box-danger form-group"><label class="col-sm-2 control-label right-lable">字段:</label><div class="col-sm-4"><input name="invest_style" type="text" value="" placeholder="请输入字段" class=" form-control" required size="30"> </div><label class="col-sm-1 control-label right-lable">值:</label><div class="col-sm-4"><input name="invest_style" type="text" value="" placeholder="请输入数据"class=" form-control" required size="30"></div></div>';
+//                var parent=$(this).parent();
+//                parent.after(str);
+                $(".remark").before(str);
             });
         });
     </script>

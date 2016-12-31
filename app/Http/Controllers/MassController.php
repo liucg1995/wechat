@@ -23,7 +23,7 @@ class MassController extends CommonController
 {
     public $wechat;
     public $month = null;
-    public $openId = null;
+    public $openid = null;
     public $number = null;
     public $tagId = null;
     public $text = null;
@@ -122,11 +122,11 @@ class MassController extends CommonController
             $massLog->save();
             return redirect('/mass/index')->with('mgssages', array(0 => '提交失败'));
         }
-//        $broadcast->sendNews($mediaId, [$openId1, $openId2]);
-//        $broadcast->sendVoice($mediaId, [$openId1, $openId2]);
-//        $broadcast->sendImage($mediaId, [$openId1, $openId2]);
-//        $broadcast->sendVideo($message, [$openId1, $openId2]);
-//        $broadcast->sendCard($cardId, [$openId1, $openId2]);
+//        $broadcast->sendNews($mediaId, [$openid1, $openid2]);
+//        $broadcast->sendVoice($mediaId, [$openid1, $openid2]);
+//        $broadcast->sendImage($mediaId, [$openid1, $openid2]);
+//        $broadcast->sendVideo($message, [$openid1, $openid2]);
+//        $broadcast->sendCard($cardId, [$openid1, $openid2]);
     }
 
     public function sendPicture(Request $request)
@@ -195,11 +195,11 @@ class MassController extends CommonController
             $massLog->save();
             return redirect('/mass/index')->with('mgssages', array(0 => '提交失败'));
         }
-//        $broadcast->sendNews($mediaId, [$openId1, $openId2]);
-//        $broadcast->sendVoice($mediaId, [$openId1, $openId2]);
-//        $broadcast->sendImage($mediaId, [$openId1, $openId2]);
-//        $broadcast->sendVideo($message, [$openId1, $openId2]);
-//        $broadcast->sendCard($cardId, [$openId1, $openId2]);
+//        $broadcast->sendNews($mediaId, [$openid1, $openid2]);
+//        $broadcast->sendVoice($mediaId, [$openid1, $openid2]);
+//        $broadcast->sendImage($mediaId, [$openid1, $openid2]);
+//        $broadcast->sendVideo($message, [$openid1, $openid2]);
+//        $broadcast->sendCard($cardId, [$openid1, $openid2]);
     }
 
     public function sendPictureText(Request $request)
@@ -277,11 +277,11 @@ class MassController extends CommonController
             $massLog->save();
             return redirect('/mass/index')->with('mgssages', array(0 => '提交失败'));
         }
-//        $broadcast->sendNews($mediaId, [$openId1, $openId2]);
-//        $broadcast->sendVoice($mediaId, [$openId1, $openId2]);
-//        $broadcast->sendImage($mediaId, [$openId1, $openId2]);
-//        $broadcast->sendVideo($message, [$openId1, $openId2]);
-//        $broadcast->sendCard($cardId, [$openId1, $openId2]);
+//        $broadcast->sendNews($mediaId, [$openid1, $openid2]);
+//        $broadcast->sendVoice($mediaId, [$openid1, $openid2]);
+//        $broadcast->sendImage($mediaId, [$openid1, $openid2]);
+//        $broadcast->sendVideo($message, [$openid1, $openid2]);
+//        $broadcast->sendCard($cardId, [$openid1, $openid2]);
     }
 
     public function preSendText(Request $request)
@@ -298,8 +298,8 @@ class MassController extends CommonController
         ]);
 
         $wechat = $this->wechat;
-        $userId="";
-        $openId = $request->userId;
+        $openid="";
+        $openid = $request->userId;
         $text = $request->text;
 
         if ($validator->fails()) {
@@ -309,24 +309,24 @@ class MassController extends CommonController
 
         } else {
 //            try {
-////                $user = UserSns::where('user_id', $userId)->where('status', '0')->first(['openid']);
-////                $openId = $user->openid;
+////                $user = UserSns::where('user_id', $openid)->where('status', '0')->first(['openid']);
+////                $openid = $user->openid;
 //            } catch (Exception $e) {
 //                return redirect('/massf')
 //                    ->withErrors(array(0 => 'userId不正确/用户没有关注'))
 //                    ->withInput();
 //            }
 
-            $broadcast = $wechat->broadcast; //var_dump($openId);die;
+            $broadcast = $wechat->broadcast; //var_dump($openid);die;
             // TEXT别名方式    
-            $sendResult = $broadcast->previewText($text, $openId); //var_dump($sendResult);die;
+            $sendResult = $broadcast->previewText($text, $openid); //var_dump($sendResult);die;
             $msgId = '测试无消息id';
 
             if ($sendResult->errcode == 0) {
                 $massLog = new MassLog();
                 $massLog->number = 1;
                 $massLog->msgId = $msgId;
-                $massLog->receiver = 'userID' . $userId;
+                $massLog->receiver = 'OPENID:' . $openid;
                 $massLog->way = '2';
                 $massLog->contents = $text;
                 $massLog->result = '提交成功';
@@ -336,7 +336,7 @@ class MassController extends CommonController
                 $massLog = new MassLog();
                 $massLog->number = 1;
                 $massLog->msgId = $msgId;
-                $massLog->receiver = 'userID' . $userId;
+                $massLog->receiver = 'OPENID:' . $openid;
                 $massLog->way = '2';
                 $massLog->contents = $text;
                 $massLog->result = '提交失败';
@@ -362,8 +362,8 @@ class MassController extends CommonController
         ]);
 
         $wechat = $this->wechat;
-        $userId="";
-        $openId = $request->userId;
+        
+        $openid = $request->userId;
         $mediaId = $request->media_id;
 
         if ($validator->fails()) {
@@ -373,24 +373,24 @@ class MassController extends CommonController
 
         } else {
 //            try {
-//                $user = UserSns::where('user_id', $userId)->where('status', '0')->first(['openid']);
-//                $openId = $user->openid;
+//                $user = UserSns::where('user_id', $openid)->where('status', '0')->first(['openid']);
+//                $openid = $user->openid;
 //            } catch (Exception $e) {
-//                return redirect('/masstest')
+//                return redirect('/mass/test')
 //                    ->withErrors(array(0 => 'userId不正确/用户没有关注'))
 //                    ->withInput();
 //            }
 
-            $broadcast = $wechat->broadcast; //var_dump($openId);die;
+            $broadcast = $wechat->broadcast; //var_dump($openid);die;
             // TEXT别名方式    
-            $sendResult = $broadcast->previewImage($mediaId, $openId);//var_dump($sendResult);die;
+            $sendResult = $broadcast->previewImage($mediaId, $openid);//var_dump($sendResult);die;
             $msgId = '测试无消息id';
 
             if ($sendResult->errcode == 0) {
                 $massLog = new MassLog();
                 $massLog->number = 1;
                 $massLog->msgId = $msgId;
-                $massLog->receiver = 'userID' . $userId;
+                $massLog->receiver = 'OPENID:' . $openid;
                 $massLog->way = '2';
                 $massLog->contents = '临时图片媒体ID：' . $mediaId;
                 $massLog->result = '提交成功';
@@ -400,7 +400,7 @@ class MassController extends CommonController
                 $massLog = new MassLog();
                 $massLog->number = 1;
                 $massLog->msgId = $msgId;
-                $massLog->receiver = 'userID' . $userId;
+                $massLog->receiver ='OPENID:' . $openid;
                 $massLog->way = '2';
                 $massLog->contents = '临时图片媒体ID：' . $mediaId;
                 $massLog->result = '提交失败';
@@ -428,7 +428,7 @@ class MassController extends CommonController
         ]);
 
         $wechat = $this->wechat;
-        $userId = $request->userId;
+        $openid = $request->userId;
         $mediaId = $request->media_id;
         $arr = explode("#", $mediaId);
         $mediaId = $arr[0];
@@ -449,40 +449,40 @@ class MassController extends CommonController
                 ->withInput();
 
         } else {
-            try {
-                $user = UserSns::where('user_id', $userId)->where('status', '0')->first(['openid']);
-                $openId = $user->openid;
-            } catch (Exception $e) {
-                return redirect('/mass/test')
-                    ->withErrors(array(0 => 'userId不正确/用户没有关注'))
-                    ->withInput();
-            }
+//            try {
+//                $user = UserSns::where('user_id', $openid)->where('status', '0')->first(['openid']);
+//                $openid = $user->openid;
+//            } catch (Exception $e) {
+//                return redirect('/mass/test')
+//                    ->withErrors(array(0 => 'userId不正确/用户没有关注'))
+//                    ->withInput();
+//            }
 
-            $broadcast = $wechat->broadcast; //var_dump($openId);die;
+            $broadcast = $wechat->broadcast; //var_dump($openid);die;
             // TEXT别名方式
-            $sendResult = $broadcast->previewNews($mediaId, $openId);//var_dump($sendResult);die;
+            $sendResult = $broadcast->previewNews($mediaId, $openid);//var_dump($sendResult);die;
             $msgId = '测试无消息id';
 
             if ($sendResult->errcode == 0) {
                 $massLog = new MassLog();
                 $massLog->number = 1;
                 $massLog->msgId = $msgId;
-                $massLog->receiver = 'userID' . $userId;
+                $massLog->receiver = 'OPENID:' . $openid;
                 $massLog->way = '2';
                 $massLog->contents = $title;
                 $massLog->result = '提交成功';
                 $massLog->save();
-                return redirect('masstest')->with('mgssages', array(0 => '提交成功'));
+                return redirect('mass/test')->with('mgssages', array(0 => '提交成功'));
             } else {
                 $massLog = new MassLog();
                 $massLog->number = 1;
                 $massLog->msgId = $msgId;
-                $massLog->receiver = 'userID' . $userId;
+                $massLog->receiver = 'OPENID:' . $openid;
                 $massLog->way = '2';
                 $massLog->contents = title;
                 $massLog->result = '提交失败';
                 $massLog->save();
-                return redirect('masstest')->with('mgssages', array(0 => '提交失败'));
+                return redirect('mass/test')->with('mgssages', array(0 => '提交失败'));
             }
         }
 
@@ -553,7 +553,7 @@ class MassController extends CommonController
      */
     public function precustomer(Request $request)
     {
-        $way = ($request['url'] == '/massf') ? '正式客服消息' : '测试客服消息';
+        $way = ($request['url'] == '/mass/index') ? '正式客服消息' : '测试客服消息';
         if (isset($request['userId']) && $request['userId'] != '') {
             //客服消息单发 openid
             $user = UserSns::where('user_id', $request['userId'])->where('status', '0')->get(['openid']);
