@@ -113,54 +113,50 @@
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="box-header with-border box-danger form-group">
-                                            <label class="col-sm-2 control-label"
-                                                   style="height:34px;line-height:34px;margin-bottom: 0;padding-left:0px">点击跳转地址:</label>
+                                            <label class="col-sm-2 control-label lable"
+                                                   style="height:34px;line-height:34px;margin-bottom: 0;padding-left:0px">头部说明:</label>
+                                            <div class="col-sm-10">
+                                                <input name="first" type="text"
+                                                       value=""
+                                                       placeholder="请输入头部说明" class=" form-control" size="30">
+                                            </div>
+                                        </div>
+                                        <div class="box-header with-border box-danger form-group">
+                                            <label class="col-sm-2 control-label lable" >模板ID:</label>
+                                            <div class="col-sm-10">
+                                                <input name="templateid" type="text" value=""
+                                                       placeholder="请输入模板ID" class=" form-control" required size="30">
+                                            </div>
+                                        </div>
+                                        <div class="box-header with-border box-danger form-group">
+                                            <label class="col-sm-2 control-label lable"
+                                            >点击跳转地址:</label>
                                             <div class="col-sm-10">
                                                 <input name="url" type="url" value="{{$userID or old('url')}}"
                                                        placeholder="请输入点击跳转地址" class=" form-control" required size="30">
                                             </div>
                                         </div>
                                         <div class="box-header with-border box-danger form-group">
-                                            <label class="col-sm-2 control-label"
-                                                   style="height:34px;line-height:34px;margin-bottom: 0;padding-left:0px">小标题:</label>
-                                            <div class="col-sm-10">
-                                                <input name="first" type="text" value="{{$userID or old('first')}}"
-                                                       placeholder="请输入小标题" class=" form-control" required size="30">
+                                            <label class="col-sm-2 control-label right-lable">字段:</label>
+                                            <div class="col-sm-4">
+                                                <input name="key[]" type="text"
+                                                       value=""
+                                                       placeholder="请输入字段" class=" form-control" required size="30">
                                             </div>
-                                        </div>
-                                        <div class="box-header with-border box-danger form-group">
-                                            <label class="col-sm-2 control-label"
-                                                   style="height:34px;line-height:34px;margin-bottom: 0;padding-left:0px">策略名称:</label>
-                                            <div class="col-sm-10">
-                                                <input name="invest_product" type="text"
-                                                       value="{{$userID or old('invest_product')}}"
-                                                       placeholder="请输入策略名称" class=" form-control" required size="30">
+                                            <label class="col-sm-1 control-label right-lable">值:</label>
+                                            <div class="col-sm-4">
+                                                <input name="value[]" type="text" value="" placeholder="请输入数据"
+                                                       class=" form-control" required size="30">
                                             </div>
+                                            <label class="col-sm-1 control-label right-lable"><i class="fa fa-plus-circle btn btn-success btn-md btn-add"></i></label>
                                         </div>
-                                        <div class="box-header with-border box-danger form-group">
-                                            <label class="col-sm-2 control-label"
-                                                   style="height:34px;line-height:34px;margin-bottom: 0;padding-left:0px">操作风格:</label>
-                                            <div class="col-sm-10">
-                                                <input name="invest_style" type="text"
-                                                       value="{{$userID or old('invest_style')}}"
-                                                       placeholder="请输入操作风格" class=" form-control" required size="30">
-                                            </div>
-                                        </div>
-                                        <div class="box-header with-border box-danger form-group">
-                                            <label class="col-sm-2 control-label"
-                                                   style="height:34px;line-height:34px;margin-bottom: 0;padding-left:0px">目前策略收益:</label>
-                                            <div class="col-sm-10">
-                                                <input name="invest_profit" type="text"
-                                                       value="{{$userID or old('invest_profit')}}"
-                                                       placeholder="请输入目前策略收益" class=" form-control" required size="30">
-                                            </div>
-                                        </div>
-                                        <div class="box-header with-border box-danger form-group">
-                                            <label class="col-sm-2 control-label"
+
+                                        <div class="box-header with-border box-danger form-group remark">
+                                            <label class="col-sm-2 control-label lable"
                                                    style="height:34px;line-height:34px;margin-bottom: 0;padding-left:0px">备注:</label>
                                             <div class="col-sm-10">
                                                 <input name="remark" type="text"
-                                                       value="{{$userID or old('remark')}}"
+                                                       value=""
                                                        placeholder="请输入备注" class=" form-control" size="30">
                                             </div>
                                         </div>
@@ -314,6 +310,10 @@
                     $(".pretemplate").hide();
                     $(".precustomer").hide();
                     $("." + type).show();
+                });
+                $(".btn-add").bind("click",function () {
+                    var  str=' <div class="box-header with-border box-danger form-group"><label class="col-sm-2 control-label right-lable">字段:</label><div class="col-sm-4"><input name="key[]" type="text" value="" placeholder="请输入字段" class=" form-control" required size="30"> </div><label class="col-sm-1 control-label right-lable">值:</label><div class="col-sm-4"><input name="value[]" type="text" value="" placeholder="请输入数据"class=" form-control" required size="30"></div></div>';
+                    $(".remark").before(str);
                 });
             });
         });

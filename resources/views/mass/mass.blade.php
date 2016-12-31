@@ -200,6 +200,22 @@
                                     <div class="col-sm-12 template">
                                         <div class="box-header with-border box-danger form-group">
                                             <label class="col-sm-2 control-label lable"
+                                                   style="height:34px;line-height:34px;margin-bottom: 0;padding-left:0px">头部说明:</label>
+                                            <div class="col-sm-10">
+                                                <input name="first" type="text"
+                                                       value=""
+                                                       placeholder="请输入头部说明" class=" form-control" size="30">
+                                            </div>
+                                        </div>
+                                        <div class="box-header with-border box-danger form-group">
+                                            <label class="col-sm-2 control-label lable" >模板ID:</label>
+                                            <div class="col-sm-10">
+                                                <input name="templateid" type="text" value=""
+                                                       placeholder="请输入模板ID" class=" form-control" required size="30">
+                                            </div>
+                                        </div>
+                                        <div class="box-header with-border box-danger form-group">
+                                            <label class="col-sm-2 control-label lable"
                                             >点击跳转地址:</label>
                                             <div class="col-sm-10">
                                                 <input name="url" type="url" value="{{$userID or old('url')}}"
@@ -396,10 +412,7 @@
                 $("." + type).show();
             });
             $(".btn-add").bind("click",function () {
-                console.log('aa');
-                 var  str=' <div class="box-header with-border box-danger form-group"><label class="col-sm-2 control-label right-lable">字段:</label><div class="col-sm-4"><input name="invest_style" type="text" value="" placeholder="请输入字段" class=" form-control" required size="30"> </div><label class="col-sm-1 control-label right-lable">值:</label><div class="col-sm-4"><input name="invest_style" type="text" value="" placeholder="请输入数据"class=" form-control" required size="30"></div></div>';
-//                var parent=$(this).parent();
-//                parent.after(str);
+                 var  str=' <div class="box-header with-border box-danger form-group"><label class="col-sm-2 control-label right-lable">字段:</label><div class="col-sm-4"><input name="key[]" type="text" value="" placeholder="请输入字段" class=" form-control" required size="30"> </div><label class="col-sm-1 control-label right-lable">值:</label><div class="col-sm-4"><input name="value[]" type="text" value="" placeholder="请输入数据"class=" form-control" required size="30"></div></div>';
                 $(".remark").before(str);
             });
         });

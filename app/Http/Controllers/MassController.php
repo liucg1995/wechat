@@ -488,10 +488,87 @@ class MassController extends CommonController
 
     }
 
+    public  function  pretemplate(Request $request){
+        /**
+         * 测试
+         */
+        foreach ($request->key as $key => $value){
+            $messagedata[$value]=$request->value[$key];
+        }
+        $arr=array(
+            "url" => $request->url,
+            "templateid" => $request->templateid,
+            'data'=>$messagedata,
+            "remark"=>$request->remark,
+            "first"=>$request->first
+        );
+
+        if (!empty($request->userId)) {
+            $userdata = $request->userId;
+            $messtype = "测试群发";
+            $msgid = "测试无消息id";
+            $receiver = "openid:" . $request->userId;
+        } else {
+            $userdata = User::select("openid")->get()->toarray();
+            $messtype = "正式群发";
+            $msgid = "正式无消息id";
+            $receiver = "正式群发";
+        }
+
+
+
+//        $messagedata = array(
+//            "小标题" => $request->first,
+//            "策略名称" => $request->invest_product,
+//            "操作风格" => $request->invest_style,
+//            "目前策略收益" => $request->invest_profit,
+//            "备注" => $request->remark,
+//            "点击跳转地址" => $request->url
+//        );
+        $str = '';
+        foreach ($messagedata as $key => $value) {
+            $str .= $key . ":" . $value . " , ";
+        }
+        $res=$this->send($arr,$userdata);
+//        $res = $temp->group($url, $data, $userdata);
+        $massLog = new MassLog();
+        $massLog->msgId = $msgid;
+        $massLog->receiver = $receiver;
+        $massLog->way = $messtype;
+        $massLog->contents = $str;
+        $massLog->result = $res['errmsg'];
+        $massLog->save();
+        if ($res['errcode'] == '0') {
+            return redirect()->back()->with('mgssages', array(0 => '提交成功'));
+        } else {
+            return redirect()->back()->with('mgssages', array(0 => '提交失败', 1 => $res['errmsg']));
+        }
+
+
+    }
+
+
+    public  function  send($arr,$openid){
+        $notice=$this->wechat->notice;
+        $templateId = $arr["templateid"];
+        $url = $arr["url"];
+        $color = '#FF0000';
+        $data = $arr["data"];
+        if(is_array($openid)){
+            foreach ($openid as $val){
+                $result = $notice->uses($templateId)->withUrl($url)->andData($data)->andReceiver($val)->send();
+            }
+        }else{
+            $result = $notice->uses($templateId)->withUrl($url)->andData($data)->andReceiver($openid)->send();
+        }
+
+       return $result;
+    }
+
     /**
      * 测试模板消息
      */
-    public function pretemplate(Request $request)
+    public function pretemplateas(Request $request)
     {
         $temp = new TemplateController();
         /**
