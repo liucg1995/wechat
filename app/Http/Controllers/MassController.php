@@ -15,6 +15,7 @@ use Exception;
 use WechatToken;
 use EasyWeChat\Core\AccessToken;
 use Illuminate\Support\Facades\Redis;
+use App\User;
 
 use EasyWeChat\Message\Text;
 use EasyWeChat\Message\Material;
@@ -556,7 +557,7 @@ class MassController extends CommonController
         $data = $arr["data"];
         if(is_array($openid)){
             foreach ($openid as $val){
-                $result = $notice->uses($templateId)->withUrl($url)->andData($data)->andReceiver($val)->send();
+                $result = $notice->uses($templateId)->withUrl($url)->andData($data)->andReceiver($val['openid'])->send();
             }
         }else{
             $result = $notice->uses($templateId)->withUrl($url)->andData($data)->andReceiver($openid)->send();
