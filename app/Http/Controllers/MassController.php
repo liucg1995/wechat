@@ -70,7 +70,7 @@ class MassController extends CommonController
 
         ]);
         if ($validator->fails()) {
-            return redirect('/massage/index')
+            return redirect('/mass/index')
                 ->withErrors($validator)
                 ->withInput();
 
@@ -110,7 +110,7 @@ class MassController extends CommonController
             $massLog->contents = $text;
             $massLog->result = '提交成功';
             $massLog->save();
-            return redirect('/massage/index')->with('mgssages', array(0 => '提交成功'));
+            return redirect('/mass/index')->with('mgssages', array(0 => '提交成功'));
         } else {
             $massLog = new MassLog();
             $massLog->msgId = $msgId;
@@ -120,7 +120,7 @@ class MassController extends CommonController
             $massLog->contents = $text;
             $massLog->result = '提交失败';
             $massLog->save();
-            return redirect('/massage/index')->with('mgssages', array(0 => '提交失败'));
+            return redirect('/mass/index')->with('mgssages', array(0 => '提交失败'));
         }
 //        $broadcast->sendNews($mediaId, [$openId1, $openId2]);
 //        $broadcast->sendVoice($mediaId, [$openId1, $openId2]);
@@ -140,7 +140,7 @@ class MassController extends CommonController
             'media_id' => 'required',
         ]);
         if ($validator->fails()) {
-            return redirect('/massage/index')
+            return redirect('/mass/index')
                 ->withErrors($validator)
                 ->withInput();
 
@@ -183,7 +183,7 @@ class MassController extends CommonController
             $massLog->contents = '临时图片媒体ID：' . $mediaId;
             $massLog->result = '提交成功';
             $massLog->save();
-            return redirect('/massage/index')->with('mgssages', array(0 => '提交成功'));
+            return redirect('/mass/index')->with('mgssages', array(0 => '提交成功'));
         } else {
             $massLog = new MassLog();
             $massLog->msgId = $msgId;
@@ -193,7 +193,7 @@ class MassController extends CommonController
             $massLog->contents = '临时图片媒体ID：' . $mediaId;
             $massLog->result = '提交失败';
             $massLog->save();
-            return redirect('/massage/index')->with('mgssages', array(0 => '提交失败'));
+            return redirect('/mass/index')->with('mgssages', array(0 => '提交失败'));
         }
 //        $broadcast->sendNews($mediaId, [$openId1, $openId2]);
 //        $broadcast->sendVoice($mediaId, [$openId1, $openId2]);
@@ -213,7 +213,7 @@ class MassController extends CommonController
             'media_id' => 'required',
         ]);
         if ($validator->fails()) {
-            return redirect('/massage/index')
+            return redirect('/mass/index')
                 ->withErrors($validator)
                 ->withInput();
 
@@ -265,7 +265,7 @@ class MassController extends CommonController
             $massLog->contents = $title;
             $massLog->result = '提交成功';
             $massLog->save();
-            return redirect('/massage/index')->with('mgssages', array(0 => '提交成功'));
+            return redirect('/mass/index')->with('mgssages', array(0 => '提交成功'));
         } else {
             $massLog = new MassLog();
             $massLog->msgId = $msgId;
@@ -275,7 +275,7 @@ class MassController extends CommonController
             $massLog->contents = $title;
             $massLog->result = '提交失败';
             $massLog->save();
-            return redirect('/massage/index')->with('mgssages', array(0 => '提交失败'));
+            return redirect('/mass/index')->with('mgssages', array(0 => '提交失败'));
         }
 //        $broadcast->sendNews($mediaId, [$openId1, $openId2]);
 //        $broadcast->sendVoice($mediaId, [$openId1, $openId2]);
@@ -303,7 +303,7 @@ class MassController extends CommonController
         $text = $request->text;
 
         if ($validator->fails()) {
-            return redirect('/massage/test')
+            return redirect('/mass/test')
                 ->withErrors($validator)
                 ->withInput();
 
@@ -331,7 +331,7 @@ class MassController extends CommonController
                 $massLog->contents = $text;
                 $massLog->result = '提交成功';
                 $massLog->save();
-                return redirect('massage/test')->with('mgssages', array(0 => '提交成功'));
+                return redirect('mass/test')->with('mgssages', array(0 => '提交成功'));
             } else {
                 $massLog = new MassLog();
                 $massLog->number = 1;
@@ -341,7 +341,7 @@ class MassController extends CommonController
                 $massLog->contents = $text;
                 $massLog->result = '提交失败';
                 $massLog->save();
-                return redirect('massage/test')->with('mgssages', array(0 => '提交失败'));
+                return redirect('mass/test')->with('mgssages', array(0 => '提交失败'));
             }
         }
 
@@ -367,7 +367,7 @@ class MassController extends CommonController
         $mediaId = $request->media_id;
 
         if ($validator->fails()) {
-            return redirect('/massage/test')
+            return redirect('/mass/test')
                 ->withErrors($validator)
                 ->withInput();
 
@@ -395,7 +395,7 @@ class MassController extends CommonController
                 $massLog->contents = '临时图片媒体ID：' . $mediaId;
                 $massLog->result = '提交成功';
                 $massLog->save();
-                return redirect('massage/test')->with('mgssages', array(0 => '提交成功'));
+                return redirect('mass/test')->with('mgssages', array(0 => '提交成功'));
             } else {
                 $massLog = new MassLog();
                 $massLog->number = 1;
@@ -405,7 +405,7 @@ class MassController extends CommonController
                 $massLog->contents = '临时图片媒体ID：' . $mediaId;
                 $massLog->result = '提交失败';
                 $massLog->save();
-                return redirect('massage/test')->with('mgssages', array(0 => '提交失败'));
+                return redirect('mass/test')->with('mgssages', array(0 => '提交失败'));
             }
         }
     }
@@ -444,7 +444,7 @@ class MassController extends CommonController
 
 
         if ($validator->fails()) {
-            return redirect('/massage/test')
+            return redirect('/mass/test')
                 ->withErrors($validator)
                 ->withInput();
 
@@ -453,7 +453,7 @@ class MassController extends CommonController
                 $user = UserSns::where('user_id', $userId)->where('status', '0')->first(['openid']);
                 $openId = $user->openid;
             } catch (Exception $e) {
-                return redirect('/massage/test')
+                return redirect('/mass/test')
                     ->withErrors(array(0 => 'userId不正确/用户没有关注'))
                     ->withInput();
             }
