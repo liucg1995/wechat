@@ -4,7 +4,7 @@
             粉丝消息
         </h1>
         <ol class="breadcrumb">
-            <li><a href="/login"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href=""><i class="fa fa-dashboard"></i> Home</a></li>
             <li class="active">粉丝消息</li>
         </ol>
     </section>
