@@ -20,7 +20,9 @@ Register the service aliases to enable the package:
 ```
 
 ##  执行php命令
+```
 php artisan  vendor:publish --tag=admin-wechat
+```
 
 ## Update  app\Http\Middleware\VerifyCsrfToken.php
 ```
