@@ -24,7 +24,7 @@ php artisan  vendor:publish --tag=admin-wechat
 
 ## Update  app\Http\Middleware\VerifyCsrfToken.php
 ```
- "wechat/materialadd",'wechat/upload','media/upload',"/api/wechat"
+ "media",'wechat/upload','media/upload',"/api/wechat"
 ```
 ## Update  app\User.php
 ```
