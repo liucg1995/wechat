@@ -18,7 +18,6 @@
             text-align: right;
         }
     </style>
-    <link rel="stylesheet" href="{{url("/bower_components/AdminLTE/plugins/iCheck/all.css")}}">
     <section class="content-header">
         <h1>
             正式群发
@@ -303,8 +302,6 @@
             </div>
         </div>
     </section>
-    <script src="{{url("/bower_components/AdminLTE/plugins/iCheck/icheck.min.js")}}"></script>
-    <script src="{{url("/bower_components/AdminLTE/plugins/iCheck/icheck.js")}}"></script>
     <script>
         $(function () {
             $(function () {

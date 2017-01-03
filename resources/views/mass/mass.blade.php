@@ -19,7 +19,6 @@
     </style>
     <script src="http://malsup.github.io/jquery.form.js"></script>
     @include('wechat::layout.message')
-    <link rel="stylesheet" href="{{url("/bower_components/AdminLTE/plugins/iCheck/all.css")}}">
     <section class="content-header">
         <h1>
             测试群发
@@ -387,8 +386,6 @@
             </div>
         </div>
     </section>
-    <script src="{{url("/bower_components/AdminLTE/plugins/iCheck/icheck.min.js")}}"></script>
-    <script src="{{url("/bower_components/AdminLTE/plugins/iCheck/icheck.js")}}"></script>
     <script>
         $(function () {
             $(".picture").hide();
