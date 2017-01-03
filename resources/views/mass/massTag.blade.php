@@ -2,6 +2,22 @@
 @section('content')
     @include('wechat::uploadpicture.upload_img')
     @include('wechat::layout.message')
+    <style>
+        .lable {
+            height: 34px;
+            line-height: 34px;
+            margin-bottom: 0;
+            padding-left: 0px
+        }
+
+        .right-lable {
+            height: 34px;
+            line-height: 34px;
+            margin-bottom: 0;
+            padding-left: 0px;
+            text-align: right;
+        }
+    </style>
     <link rel="stylesheet" href="{{url("/bower_components/AdminLTE/plugins/iCheck/all.css")}}">
     <section class="content-header">
         <h1>

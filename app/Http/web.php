@@ -51,7 +51,10 @@ Route::group(['namespace' => '\Guo\Wechat\Http\Controllers'], function(){
     Route::any('/media/upload', 'MediaController@upload');
     Route::any('/media/json', 'MediaController@json');
     Route::any('/media/delete', 'MediaController@delete');
-
+    //自定义参数二维码
+    Route::get('/qrcode', 'QrcodeController@index');//正式
+    Route::get('/qrcode/fover', 'QrcodeController@fover');//正式
+    Route::get('/qrcode/temporary', 'QrcodeController@temporary');//正式
     //粉丝消息
     Route::any('/message', 'MessageController@index');
     //更新用户信息
