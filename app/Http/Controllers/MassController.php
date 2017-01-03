@@ -12,8 +12,7 @@ use DB;
 use Exception;
 use WechatToken;
 use Illuminate\Support\Facades\Redis;
-use App\User;
-
+use App\Newuser as User;
 use EasyWeChat\Message\Text;
 use EasyWeChat\Message\Material;
 
@@ -46,11 +45,8 @@ class MassController extends CommonController
 //                
 //                break;
             case 'test':
-
                 break;
             case 'users'://所有用户发送
-
-
                 $this->number = $wechat->user->lists()->total;
                 break;
         }
@@ -71,7 +67,6 @@ class MassController extends CommonController
             return redirect('/mass/index')
                 ->withErrors($validator)
                 ->withInput();
-
         }
         $number = $this->number;
         $wechat = $this->wechat;
@@ -80,25 +75,21 @@ class MassController extends CommonController
 
         $msgId = null;
         if ($request->select == 'tag') {
-
             if ($this->number < 1) {
                 echo 'this tag people less than one';
                 die;
             }
             $sendResult = $broadcast->sendText($text, $this->tagId);
             $msgId = $sendResult->msg_id;
-
         } else {
             $sendResult = $broadcast->sendText($text);
             $msgId = $sendResult->msg_id;
-
         }
         if ($request->select == 'users') {
             $receiver = '所有用户';
         } else {
             $receiver = '标签id' . $this->tagId;
         }
-
         if ($sendResult->errcode == 0) {
             $massLog = new MassLog();
             $massLog->msgId = $msgId;
@@ -120,16 +111,10 @@ class MassController extends CommonController
             $massLog->save();
             return redirect('/mass/index')->with('messages', array(0 => '提交失败'));
         }
-//        $broadcast->sendNews($mediaId, [$openid1, $openid2]);
-//        $broadcast->sendVoice($mediaId, [$openid1, $openid2]);
-//        $broadcast->sendImage($mediaId, [$openid1, $openid2]);
-//        $broadcast->sendVideo($message, [$openid1, $openid2]);
-//        $broadcast->sendCard($cardId, [$openid1, $openid2]);
     }
 
     public function sendPicture(Request $request)
     {
-
         if ($request->select == 'test') {
             echo 'Please select test send to group';
             die;
@@ -141,26 +126,18 @@ class MassController extends CommonController
             return redirect('/mass/index')
                 ->withErrors($validator)
                 ->withInput();
-
         }
-
         $number = $this->number;
         $wechat = $this->wechat;
         $mediaId = $request->media_id;
         $broadcast = $wechat->broadcast;
-
         $msgId = null;
         if ($request->select == 'tag') {
-
             if ($this->number < 1) {
                 echo 'this tag people less than one';
                 die;
             }
-            //$sendResult = $broadcast->sendImage($text, $this->tagId);
-            //$msgId = $sendResult->msg_id;
-
         } else {
-//            dd($request->select);
             $sendResult = $broadcast->sendImage($mediaId);
 
             $msgId = $sendResult->msg_id;
@@ -193,11 +170,6 @@ class MassController extends CommonController
             $massLog->save();
             return redirect('/mass/index')->with('messages', array(0 => '提交失败'));
         }
-//        $broadcast->sendNews($mediaId, [$openid1, $openid2]);
-//        $broadcast->sendVoice($mediaId, [$openid1, $openid2]);
-//        $broadcast->sendImage($mediaId, [$openid1, $openid2]);
-//        $broadcast->sendVideo($message, [$openid1, $openid2]);
-//        $broadcast->sendCard($cardId, [$openid1, $openid2]);
     }
 
     public function sendPictureText(Request $request)
@@ -214,9 +186,7 @@ class MassController extends CommonController
             return redirect('/mass/index')
                 ->withErrors($validator)
                 ->withInput();
-
         }
-
         $number = $this->number;
         $wechat = $this->wechat;
         $mediaId = $request->media_id;
@@ -240,9 +210,6 @@ class MassController extends CommonController
                 echo 'this tag people less than one';
                 die;
             }
-            //$sendResult = $broadcast->sendImage($text, $this->tagId);
-            //$msgId = $sendResult->msg_id;
-
         } else {
             $sendResult = $broadcast->sendNews($mediaId);
             $msgId = $sendResult->msg_id;
@@ -275,11 +242,6 @@ class MassController extends CommonController
             $massLog->save();
             return redirect('/mass/index')->with('messages', array(0 => '提交失败'));
         }
-//        $broadcast->sendNews($mediaId, [$openid1, $openid2]);
-//        $broadcast->sendVoice($mediaId, [$openid1, $openid2]);
-//        $broadcast->sendImage($mediaId, [$openid1, $openid2]);
-//        $broadcast->sendVideo($message, [$openid1, $openid2]);
-//        $broadcast->sendCard($cardId, [$openid1, $openid2]);
     }
 
     public function preSendText(Request $request)
@@ -306,10 +268,10 @@ class MassController extends CommonController
 
         } else {
             try {
-                $user = User::where(User::$key, $userid)->first(['openid']);
+                $user = User::where("id", $userid)->first(['openid']);
                 $openid = $user->openid;
             } catch (Exception $e) {
-                return redirect('/massf')
+                return redirect('/mass/test')
                     ->withErrors(array(0 => 'userId不正确/用户没有关注'))
                     ->withInput();
             }
@@ -370,7 +332,7 @@ class MassController extends CommonController
 
         } else {
             try {
-                $user = User::where(User::$key, $userid)->first(['openid']);
+                $user = User::where("id", $userid)->first(['openid']);
                 $openid = $user->openid;
             } catch (Exception $e) {
                 return redirect('/mass/test')
@@ -447,7 +409,7 @@ class MassController extends CommonController
 
         } else {
             try {
-               $user = User::where(User::$key, $userid)->first(['openid']);
+               $user = User::where("id", $userid)->first(['openid']);
                 $openid = $user->openid;
             } catch (Exception $e) {
                 return redirect('/mass/test')
@@ -630,11 +592,8 @@ class MassController extends CommonController
         $way = ($request['url'] == '/mass/index') ? '正式客服消息' : '测试客服消息';
         if (isset($request['userId']) && $request['userId'] != '') {
             //客服消息单发 openid
-            $user =array(
-                array(
-                'openid'=>$request['userId']
-                )
-            );
+
+            $user = User::where("id",$request['userId'])->get([User::$key])->toarray();
             $receiver = 'userID' . $request['userId'];
         } else {
             //客服消息群发 openid

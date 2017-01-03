@@ -4,7 +4,7 @@ namespace Guo\Wechat\Http\Controllers;
 
 
 use Guo\Wechat\Model\Message;
-use App\User;
+use App\Newuser as User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
