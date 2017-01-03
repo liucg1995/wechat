@@ -25,12 +25,6 @@
             测试群发
             <small>用于群发内容编辑样式的测试</small>
         </h1>
-        <ol class="breadcrumb">
-            <li><a href="/welcome"><i class="fa fa-dashboard"></i>家</a></li>
-            <li><a href="#">消息管理</a></li>
-            <li class="active">测试群发</li>
-        </ol>
-
     </section>
     <div class="box-header with-border">
         <button data-type="text" class="btn btn-primary active">文字</button>

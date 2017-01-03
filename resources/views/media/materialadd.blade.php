@@ -31,11 +31,6 @@
             素材管理
             <small>关键词回复素材管理</small>
         </h1>
-        <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li>微信设置</li>
-            <li class="active">素材管理</li>
-        </ol>
     </section>
     <section class="content-header">
         <p>

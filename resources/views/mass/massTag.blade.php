@@ -24,11 +24,6 @@
             正式群发
             <small>正式发送群发内容</small>
         </h1>
-        <ol class="breadcrumb">
-            <li><a href="/welcome"><i class="fa fa-dashboard"></i>家</a></li>
-            <li><a href="#">消息管理</a></li>
-            <li class="active">正式群发</li>
-        </ol>
     </section>
     <div class="box-header with-border">
         <button data-type="text" class="btn btn-primary active">文字</button>

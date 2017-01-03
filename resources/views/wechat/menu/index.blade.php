@@ -5,10 +5,6 @@
             菜单设置
             <small>自定义菜单设置</small>
         </h1>
-        <ol class="breadcrumb">
-            <li><a href="/login"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">菜单设置</li>
-        </ol>
     </section>
     @include("wechat::layout.message")
     <section class="content">

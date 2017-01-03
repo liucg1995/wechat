@@ -7,11 +7,6 @@
             用户管理
             <small>User tables</small>
         </h1>
-        <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">Wechat</a></li>
-            <li class="active">User tables</li>
-        </ol>
     </section>
     <section class="content">
         <div class="row">
