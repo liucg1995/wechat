@@ -22,6 +22,7 @@ class MessageController extends CommonController
 
     public function index(Request $request)
     {
+       echo  User::$key;
         $where = array();
         $like = array();
         $msg_type = $request->msg_type;
@@ -65,7 +66,7 @@ class MessageController extends CommonController
             $append[$key] = $value;
         }
         $list->appends($append);
-        return view('wechat::message.index',['list' => $list]);
+//        return view('wechat::message.index',['list' => $list]);
     }
 
 
