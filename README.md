@@ -39,6 +39,7 @@ php artisan  vendor:publish --tag=admin-wechat
 /mass/test      测试群发
 /mass/index     正式群发
 /message        粉丝消息管理 
+/qrcode         生成二维码
 
 ```
 
