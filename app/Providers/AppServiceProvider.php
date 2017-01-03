@@ -35,13 +35,13 @@ class AppServiceProvider extends ServiceProvider
 
 //        $this->publishes([realpath(__DIR__.'/../../resources/views') => base_path('resources/views/vendor/guo/file')], 'views');
 
-        $this->publishes([realpath(__DIR__.'/../../resources/assets') => public_path('assets')], 'public');
+        $this->publishes([realpath(__DIR__.'/../../resources/assets') => public_path('assets')], 'admin-wechat');
 
-        $this->publishes([realpath(__DIR__.'/../../resources/config') => config_path('')]);
+        $this->publishes([realpath(__DIR__.'/../../resources/config') => config_path('')], 'admin-wechat');
         $this->publishes([realpath(__DIR__.'/../../user') => base_path('app')]);
 
-        $this->publishes([realpath(__DIR__.'/../../database/migrations') => database_path('migrations')], 'migrations');
+        $this->publishes([realpath(__DIR__.'/../../database/migrations') => database_path('migrations')], 'admin-wechat');
 
-        $this->publishes([realpath(__DIR__.'/../../database/seeds') => database_path('seeds')], 'seeds');
+        $this->publishes([realpath(__DIR__.'/../../database/seeds') => database_path('seeds')], 'admin-wechat');
     }
 }
