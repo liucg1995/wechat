@@ -38,7 +38,7 @@ class AppServiceProvider extends ServiceProvider
         $this->publishes([realpath(__DIR__.'/../../resources/assets') => public_path('assets')], 'admin-wechat');
 
         $this->publishes([realpath(__DIR__.'/../../resources/config') => config_path('')], 'admin-wechat');
-        $this->publishes([realpath(__DIR__.'/../../user') => base_path('app')]);
+        $this->publishes([realpath(__DIR__.'/../../user') => base_path('app')], 'admin-wechat');
 
         $this->publishes([realpath(__DIR__.'/../../database/migrations') => database_path('migrations')], 'admin-wechat');
 
