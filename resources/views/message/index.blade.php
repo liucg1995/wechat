@@ -77,7 +77,7 @@
                                         </tr>
                                         @foreach($list as $val)
                                             <tr>
-                                                <td>{{$val['openid']}}</td>
+                                                <td>{{$val['from_user_name']}}</td>
                                                 @if($val['msg_type'] == 'event')
                                                 <td>{{$val['event_key']}}</td>
                                                 @else
