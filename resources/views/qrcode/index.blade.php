@@ -24,7 +24,7 @@
                                     <div class="box-header with-border box-danger form-group">
                                         <label class="col-sm-2 control-label lable"
                                                style="height:34px;line-height:34px;margin-bottom: 0;padding-left:0px">自定义参数:</label>
-                                        <div class="col-sm-10">
+                                        <div class="col-sm-5">
                                             <input name="f-data" type="text" value="" placeholder="请输入参数"
                                                    class=" form-control f-data" size="30">
                                         </div>
@@ -49,7 +49,7 @@
                                     <div class="box-header with-border box-danger form-group">
                                         <label class="col-sm-2 control-label lable"
                                                style="height:34px;line-height:34px;margin-bottom: 0;padding-left:0px">自定义参数:</label>
-                                        <div class="col-sm-10">
+                                        <div class="col-sm-5">
                                             <input name="t-data" type="text" value="" placeholder="请输入参数"
                                                    class=" form-control t-data" size="30">
                                         </div>
@@ -57,7 +57,7 @@
                                     <div class="box-header with-border box-danger form-group">
                                         <label class="col-sm-2 control-label lable"
                                                style="height:34px;line-height:34px;margin-bottom: 0;padding-left:0px">有效时间:</label>
-                                        <div class="col-sm-10">
+                                        <div class="col-sm-5">
                                             <input name="t-time" type="number" value="" placeholder="请输入有效时间"
                                                    class=" form-control t-time" size="30">
                                         </div>
