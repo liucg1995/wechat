@@ -50,10 +50,10 @@
                                                                                     value='test' id='tset'>
                                 <div class="box-header with-border box-danger form-group">
                                     <label class="col-sm-2 control-label"
-                                           style="height:34px;line-height:34px;margin-bottom: 0;padding-left:0px">OPENID</label>
+                                           style="height:34px;line-height:34px;margin-bottom: 0;padding-left:0px">userid</label>
                                     <div class="col-sm-10">
                                         <input name="userId" type="text" value="{{$userID or old('userId')}}"
-                                               placeholder="请输入openid" class=" form-control" size="30">
+                                               placeholder="请输入userid" class=" form-control" size="30">
                                     </div>
                                 </div>
                             </h3>
@@ -93,10 +93,10 @@
                                 <input type='hidden' name='select' value='test' id='tset'>
                                 <div class="box-header with-border box-danger form-group">
                                     <label class="col-sm-2 control-label"
-                                           style="height:34px;line-height:34px;margin-bottom: 0;padding-left:0px">OPENID</label>
+                                           style="height:34px;line-height:34px;margin-bottom: 0;padding-left:0px">userid</label>
                                     <div class="col-sm-10">
                                         <input name="userId" type="text" value="{{$userID or old('userId')}}"
-                                               placeholder="请输入OPENID" class=" form-control" size="30">
+                                               placeholder="请输入userid" class=" form-control" size="30">
                                     </div>
                                 </div>
                             </h3>
@@ -145,10 +145,10 @@
                                 <input type='hidden' name='select' value='test' id='tset'>
                                 <div class="box-header with-border box-danger form-group">
                                     <label class="col-sm-2 control-label"
-                                           style="height:34px;line-height:34px;margin-bottom: 0;padding-left:10px">OPENID</label>
+                                           style="height:34px;line-height:34px;margin-bottom: 0;padding-left:10px">userid</label>
                                     <div class="col-sm-10">
                                         <input name="userId" type="text" value="{{$userID or old('userId')}}"
-                                               placeholder="请输入OPENID" class=" form-control" size="30">
+                                               placeholder="请输入userid" class=" form-control" size="30">
                                     </div>
                                 </div>
                             </h3>
@@ -185,10 +185,10 @@
                                 <input type='hidden' name='select' value='test' id='tset'>
                                 <div class="box-header with-border box-danger form-group">
                                     <label class="col-sm-2 control-label"
-                                           style="height:34px;line-height:34px;margin-bottom: 0;padding-left:0px">OPENID:</label>
+                                           style="height:34px;line-height:34px;margin-bottom: 0;padding-left:0px">userid:</label>
                                     <div class="col-sm-10">
                                         <input name="userId" type="text" value="{{$userID or old('userId')}}"
-                                               placeholder="请输入OPENID" class=" form-control" required
+                                               placeholder="请输入userid" class=" form-control" required
                                                size="30">
                                     </div>
                                 </div>
@@ -271,10 +271,10 @@
                                 <input type='hidden' name='select' value='test' id='tset'>
                                 <div class="box-header with-border box-danger form-group">
                                     <label class="col-sm-2 control-label"
-                                           style="height:34px;line-height:34px;margin-bottom: 0;padding-left:0px">OPENID</label>
+                                           style="height:34px;line-height:34px;margin-bottom: 0;padding-left:0px">userid</label>
                                     <div class="col-sm-10">
                                         <input name="userId" type="text" value="{{$userID or old('userId')}}"
-                                               placeholder="请输入OPENID" class=" form-control" size="30">
+                                               placeholder="请输入userid" class=" form-control" size="30">
                                     </div>
                                 </div>
                             </h3>
