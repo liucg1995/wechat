@@ -26,7 +26,7 @@ php artisan  vendor:publish --tag=admin-wechat
 ```
  "media",'wechat/upload','media/upload',"/api/wechat"
 ```
-## Update  app\User.php
+## Update  app\Newuser.php
 ```
 设置用户表的信息
 ```
