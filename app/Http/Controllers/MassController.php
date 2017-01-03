@@ -3,8 +3,6 @@
 namespace Guo\Wechat\Http\Controllers;
 
 
-
-use EasyWeChat\Foundation\Application;
 use Illuminate\Http\Request;
 use Guo\Wechat\Model\MassLog;
 use Guo\Wechat\Model\Media;
@@ -13,7 +11,6 @@ use Validator;
 use DB;
 use Exception;
 use WechatToken;
-use EasyWeChat\Core\AccessToken;
 use Illuminate\Support\Facades\Redis;
 use App\User;
 
@@ -299,8 +296,7 @@ class MassController extends CommonController
         ]);
 
         $wechat = $this->wechat;
-        $openid="";
-        $openid = $request->userId;
+        $userid = $request->userId;
         $text = $request->text;
 
         if ($validator->fails()) {
@@ -309,14 +305,14 @@ class MassController extends CommonController
                 ->withInput();
 
         } else {
-//            try {
-////                $user = UserSns::where('user_id', $openid)->where('status', '0')->first(['openid']);
-////                $openid = $user->openid;
-//            } catch (Exception $e) {
-//                return redirect('/massf')
-//                    ->withErrors(array(0 => 'userId不正确/用户没有关注'))
-//                    ->withInput();
-//            }
+            try {
+                $user = User::where(User::$key, $userid)->first(['openid']);
+                $openid = $user->openid;
+            } catch (Exception $e) {
+                return redirect('/massf')
+                    ->withErrors(array(0 => 'userId不正确/用户没有关注'))
+                    ->withInput();
+            }
 
             $broadcast = $wechat->broadcast; //var_dump($openid);die;
             // TEXT别名方式    
@@ -363,8 +359,8 @@ class MassController extends CommonController
         ]);
 
         $wechat = $this->wechat;
-        
-        $openid = $request->userId;
+
+        $userid = $request->userId;
         $mediaId = $request->media_id;
 
         if ($validator->fails()) {
@@ -373,14 +369,14 @@ class MassController extends CommonController
                 ->withInput();
 
         } else {
-//            try {
-//                $user = UserSns::where('user_id', $openid)->where('status', '0')->first(['openid']);
-//                $openid = $user->openid;
-//            } catch (Exception $e) {
-//                return redirect('/mass/test')
-//                    ->withErrors(array(0 => 'userId不正确/用户没有关注'))
-//                    ->withInput();
-//            }
+            try {
+                $user = User::where(User::$key, $userid)->first(['openid']);
+                $openid = $user->openid;
+            } catch (Exception $e) {
+                return redirect('/mass/test')
+                    ->withErrors(array(0 => 'userId不正确/用户没有关注'))
+                    ->withInput();
+            }
 
             $broadcast = $wechat->broadcast; //var_dump($openid);die;
             // TEXT别名方式    
@@ -429,7 +425,7 @@ class MassController extends CommonController
         ]);
 
         $wechat = $this->wechat;
-        $openid = $request->userId;
+        $userid = $request->userId;
         $mediaId = $request->media_id;
         $arr = explode("#", $mediaId);
         $mediaId = $arr[0];
@@ -450,14 +446,14 @@ class MassController extends CommonController
                 ->withInput();
 
         } else {
-//            try {
-//                $user = UserSns::where('user_id', $openid)->where('status', '0')->first(['openid']);
-//                $openid = $user->openid;
-//            } catch (Exception $e) {
-//                return redirect('/mass/test')
-//                    ->withErrors(array(0 => 'userId不正确/用户没有关注'))
-//                    ->withInput();
-//            }
+            try {
+               $user = User::where(User::$key, $userid)->first(['openid']);
+                $openid = $user->openid;
+            } catch (Exception $e) {
+                return redirect('/mass/test')
+                    ->withErrors(array(0 => 'userId不正确/用户没有关注'))
+                    ->withInput();
+            }
 
             $broadcast = $wechat->broadcast; //var_dump($openid);die;
             // TEXT别名方式
@@ -589,12 +585,12 @@ class MassController extends CommonController
             $data[$key] = $datas[$i++];
         }
         if (!empty($request->userId)) {
-            $userdata = UserSns::select("openid")->where("user_id", $request->userId)->get()->toarray();
+            $userdata = User::select("openid")->where("user_id", $request->userId)->get()->toarray();
             $messtype = "测试群发";
             $msgid = "测试无消息id";
             $receiver = "Userid" . $request->userId;
         } else {
-            $userdata = UserSns::select("openid")->get()->toarray();
+            $userdata = User::select("openid")->get()->toarray();
             $messtype = "正式群发";
             $msgid = "正式无消息id";
             $receiver = "正式群发";
@@ -639,11 +635,10 @@ class MassController extends CommonController
                 'openid'=>$request['userId']
                 )
             );
-            $user = User::get(['openid'])->toarray();
             $receiver = 'userID' . $request['userId'];
         } else {
             //客服消息群发 openid
-            $user = User::get(['openid'])->toarray();
+            $user = User::get([User::$key])->toarray();
             $receiver = '关注且48小时有互动用户';
         }
 
