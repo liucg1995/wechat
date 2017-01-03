@@ -1,16 +1,6 @@
-# Laravel 5.3 Vendor Package Example
-### An example on how-to create a vendor package for Composer
+# Laravel 5.3 微信后台管理
+### 微信后台管理工具
 
-"Packages are the primary way of adding functionality to Laravel. Packages might be anything from a great way to work with dates like Carbon, or an entire BDD testing framework like Behat."
-https://laravel.com/docs/master/packages
-
-Use this package to help develop new packages to share among your projects -- or the world.
-https://github.com/Askedio/Laravel-Vendor-Package
-# Installation
-1. Clone this repo.
-
-3. Add to https://packagist.org.
-4. Using your details, install with commands below.
 
 # Installation
 
@@ -30,11 +20,15 @@ Register the service aliases to enable the package:
 ```
 
 ##  执行php命令
-php artisan  vendor:publish
+php artisan  vendor:publish --tag=admin-wechat
 
 ## Update  app\Http\Middleware\VerifyCsrfToken.php
 ```
  "wechat/materialadd",'wechat/upload','media/upload',"/api/wechat"
+```
+## Update  app\User.php
+```
+设置用户表的信息
 ```
 
 ## 微信所需链接
@@ -42,8 +36,9 @@ php artisan  vendor:publish
 /api/wechat     微信响应接口
 /media          素材管理
 /wechat/menu    自定义菜单
-/mass/test   测试群发
-/mass/index  正式群发
+/mass/test      测试群发
+/mass/index     正式群发
+/message        粉丝消息管理 
 
 ```
 
