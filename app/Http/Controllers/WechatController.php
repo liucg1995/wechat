@@ -22,6 +22,15 @@ use Illuminate\Support\Facades\Redis;
  * 3.投票口令 跟随投票口令一起修改,用户输入"投票口令",公众号返回具体的投票口令内容
  * 4.实际的投票口令内容
  */
+
+define('MEDIA_TYPE_MIXED', 1);
+define('MEDIA_TYPE_MIXED_MULTI', 2);
+define('MEDIA_TYPE_IMAGE', 3);
+define('MEDIA_TYPE_AUDIO', 4);
+define('MEDIA_TYPE_VIDEO', 5);
+define('MEDIA_TYPE_TEXT', 6);
+
+
 class WechatController extends CommonController
 {
     public $request;
@@ -44,18 +53,21 @@ class WechatController extends CommonController
             $cates[$v->id] = $v->label;
         }
         //所有media准备
-        $medias = Media::where(['multi_order' => '0'])->get(['id', 'content', 'title', 'media_type']);
+        $medias = Media::where(['multi_order' => '0'])->get(['id', 'content', 'title', 'media_type',"bundle_id"]);
         $mediasView = array();
         foreach ($medias as $k => $v) {
             if ($v->media_type == 6) {
-                $mediasView[$v->id] = '[文本]' . $v->content;
+                $mediasView['text'][$v->id] = $v->content;
             } else if ($v->media_type == 3) {
-                $mediasView[$v->id] = '[图片]' . $v->title;
+                $mediasView['pic'][$v->id] =  $v->title;
+            } else if($v->bundle_id=='0') {
+                $mediasView['single'][$v->id] = $v->title;
             } else {
-                $mediasView[$v->id] = '[图文]' . $v->title;
+                $mediasView['double'][$v->id] = $v->title;
             }
 
         }
+//        dd($mediasView);
 
         //单个规则数据准备
         $r = $this->request;
@@ -77,6 +89,56 @@ class WechatController extends CommonController
         //模版
         return view('wechat::wechat.rule', [
             'rules' => $rules,
+            'cates' => $cates,
+            'id' => $id,
+            'rule' => $rule,
+            'medias' => $mediasView,
+            'textType' => $textType
+        ]);
+    }
+
+    public  function addrule(){
+        $textType = config('wxconfig.mediaType.text');
+        $ruleCates = RuleCate::all(['id', 'label']);
+
+        $cates = array();
+        foreach ($ruleCates as $k => $v) {
+            $cates[$v->id] = $v->label;
+        }
+        //所有media准备
+        $medias = Media::where(['multi_order' => '0'])->get(['id', 'content', 'title', 'media_type',"bundle_id"]);
+        $mediasView = array();
+        foreach ($medias as $k => $v) {
+            if ($v->media_type == 6) {
+                $mediasView['text'][$v->id] = $v->content;
+            } else if ($v->media_type == 3) {
+                $mediasView['pic'][$v->id] =  $v->title;
+            } else if($v->bundle_id=='0') {
+                $mediasView['single'][$v->id] = $v->title;
+            } else {
+                $mediasView['double'][$v->id] = $v->title;
+            }
+
+        }
+//        dump($mediasView);
+        //单个规则数据准备
+        $r = $this->request;
+        $id = $r->id ? $r->id : 0;
+
+        if ($id > 0) {
+            $rule = Rule::find($id);
+            if ($rule) {
+                if ($rule->media_type == 2) {
+                    $media = Media::where(['bundle_id' => $rule->media_id])->orderBy('multi_order', 'asc')->get();
+                    $rule->media_id = $media[0]->id;
+                }
+            }
+        }
+        if (empty($rule)) {
+            $rule = (object)array('id' => '新增', 'keyword' => '', 'cate_id' => 0, 'media_id' => 0,'media_type' => "");
+        }
+        //模版
+        return view('wechat::wechat.addrule', [
             'cates' => $cates,
             'id' => $id,
             'rule' => $rule,

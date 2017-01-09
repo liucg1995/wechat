@@ -1,7 +1,7 @@
 @extends(config("wxconfig.extends")) @section('content')
     <section class="content-header">
         <h1>
-            回复规则
+            规则列表
             <small>关键词回复规则管理</small>
         </h1>
         <ol class="breadcrumb">
@@ -11,61 +11,6 @@
         </ol>
     </section>
     @include('wechat::layout.message', ['errors' => $errors])
-    <section class="content-header">
-
-        <!-- SELECT2 EXAMPLE -->
-        <div class="box box-default">
-            <form action="" enctype="application/x-www-form-urlencoded" method="post">
-                {{ csrf_field() }}
-                <div class="box-header with-border">
-                    <h3 class="box-title">编辑规则</h3>
-                </div>
-                <!-- /.box-header -->
-                <div class="box-body">
-                    <div class="row">
-                        <div class="col-md-1">
-                            <div class="form-group">
-                                <label>id</label>
-                                <input type="text" value="{{$rule->id}}" class="form-control" placeholder="新增" disabled>
-                            </div>
-                        </div>
-                        <!-- /.col -->
-                        <div class="col-md-8">
-                            <div class="form-group">
-                                <label>关键词内容</label>
-                                <input name="keyword" type="text" value="{{$rule->keyword}}" class="form-control"
-                                       placeholder="Enter ...">
-                            </div>
-                        </div>
-                        <!-- /.col -->
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>类型</label>
-                                {{ Form::select('cate_id', $cates,$rule->cate_id,['class'=>'form-control']) }}
-                            </div>
-                        </div>
-                        <!-- /.col -->
-                    </div>
-                    <!-- /.row -->
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label>选择回复语</label>
-                                {{ Form::select('media_id', $medias,$rule->media_id,['class'=>'form-control']) }}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- /.box-body -->
-                <div class="box-footer">
-                    <input type="hidden" name="id" value="{{$id}}">
-                    <input type="hidden" name="media_type" value="{{$textType}}">
-                    <input type="submit" value="提交" class="btn btn-primary pull-right"> 
-                </div>
-            </form>
-        </div>
-    </section>
-    <!-- /.box -->
     <section class="content">
         <div class="row">
             <div class="col-xs-12">
@@ -73,6 +18,7 @@
                     <div class="box-header with-border">
                         <h3 class="box-title">规则列表</h3>
                         <div class="box-tools">
+                            <a href="/wechat/setrule"><label class="col-sm-1 control-label right-lable"><i class="fa fa-plus-circle btn btn-success btn-md btn-add"></i></label></a>
                         </div>
                     </div>
                     <!-- /.box-header -->
@@ -90,6 +36,7 @@
                                         <tr role="row">
                                             <th>id</th>
                                             <th>关键词内容</th>
+                                            <th>关键词类型</th>
                                             <th>添加时间</th>
                                             <th>管理</th>
                                         </tr>
@@ -104,6 +51,22 @@
                                                     <div>{{ $v->keyword }}</div>
                                                 </td>
                                                 <td>
+                                                    <div>
+                                                        <?php
+                                                        switch ($v->media_type){
+                                                            case '1':
+                                                                echo "单图文";break;
+                                                            case '2':
+                                                                echo "多图文";break;
+                                                            case '3':
+                                                                echo "图片";break;
+                                                            case '6':
+                                                                echo "文字";break;
+                                                        }
+                                                        ?>
+                                                    </div>
+                                                </td>
+                                                <td>
                                                     <div>{{ $v->created_at }}</div>
                                                 </td>
 
@@ -111,7 +74,7 @@
                                                     @if($v->id==config('app.ruleId.follow'))
                                                         <a href="/wechat/follow">修改关注回复</a>
                                                     @else
-                                                        <a href="?id={{$v->id}}">修改</a>
+                                                        <a href="/wechat/setrule?id={{$v->id}}">修改</a>
                                                     @endif
 
                                                 </td>
@@ -144,6 +107,15 @@
     </section>
     <script>
         $(document).ready(function () {
+            $(".nav-tabs li").click(function () {
+                $(this).addClass("active").siblings().removeClass("active");
+                var type = $(this).data("type");
+                $(".text").hide();
+                $(".single").hide();
+                $(".pic").hide();
+                $(".double").hide();
+                $("." + type).show();
+            });
         });
     </script>
 @endsection

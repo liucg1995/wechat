@@ -62,6 +62,8 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/wechat/follow', 'WechatController@setFollow');
 
             Route::get('/wechat/rule', 'WechatController@rule');
+            Route::get('/wechat/setrule', 'WechatController@addrule');
+            Route::post('/wechat/setrule', 'WechatController@setRule');
             Route::post('/wechat/rule', 'WechatController@setRule');
             Route::get('/wechat/deleterule', 'WechatController@deleteRule');
             Route::any('/aa', function () {
