@@ -18,8 +18,8 @@
                     <div class="box-header with-border">
                         <h3 class="box-title">规则列表</h3>
                         <div class="box-tools">
-                            <a href="/wechat/setrule"><label class="col-sm-1 control-label right-lable"><i class="fa fa-plus-circle btn btn-success btn-md btn-add"></i></label></a>
-                            <a href="/wechat/resetrule"><label class="col-sm-1 control-label right-lable"><i class="fa fa-plus-circle btn btn-danger btn-md ">更新规则</i></label></a>
+                            <a href="/wechat/setrule" class="pull-left"><label class="col-sm-1 control-label right-lable"><i class="fa fa-plus-circle btn btn-success btn-md btn-add"></i></label></a>
+                            <a href="/wechat/resetrule" class="pull-right"><label class="col-sm-1 control-label right-lable"><i class="fa  btn btn-danger btn-md ">更新规则</i></label></a>
 
                         </div>
                     </div>
