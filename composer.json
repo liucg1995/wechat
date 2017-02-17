@@ -1,6 +1,7 @@
 {
   "name": "guo/wechat",
   "description": "wechat",
+  "version": "1.0.0",
   "keywords": [
     "laravel"
   ],
