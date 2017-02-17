@@ -224,10 +224,12 @@ class WechatController extends CommonController
     }
 
     /*
+     * 删除规则
+     */
     public function deleteRule()
     {
         $r = $this->request;
-        if ($r->id > 100) {
+        if ($r->id > 0) {
             $rule = Rule::find($r->id);
             //删redis
             $redisR = Rule::delRule($rule->keyword);
@@ -235,7 +237,27 @@ class WechatController extends CommonController
         }
         return redirect('wechat/rule')->with('messages', array('数据库删除结果:' . $dbR, 'redis删除结果:' . $redisR));
     }
-    */
+
+    /**
+     * 重置规则
+     */
+
+    public function reset_rule()
+    {
+        $data = Rule::reset_rule();
+        if(empty($data)){
+            return redirect('wechat/rule')->with('messages', array('规则重置成功'));
+        }else{
+            $info[]="规则重置失败";
+            if(!empty($data["delete"])){
+                $info[]="redis 数据删除失败";
+            }
+            if(!empty($data["add"])){
+                $info[]="redis 数据添加失败";
+            }
+            return redirect('wechat/rule')->withErrors($info);
+        }
+    }
 
     public function command()
     {

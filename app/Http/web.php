@@ -66,9 +66,8 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/wechat/setrule', 'WechatController@setRule');
             Route::post('/wechat/rule', 'WechatController@setRule');
             Route::get('/wechat/deleterule', 'WechatController@deleteRule');
-            Route::any('/aa', function () {
-                echo 'aaa';
-            });
+            Route::get('/wechat/resetrule', 'WechatController@reset_rule');
+
             //逻辑处理
             Route::group(['prefix' => 'mass'], function () {//KING
                 //正式
