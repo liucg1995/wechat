@@ -33,7 +33,7 @@ class Rule extends Model
     public static function delRule($keyword)
     {
         $redisKey = config('app.redisKey.reply') . sprintf(self::KEY_KEYWORD, md5($keyword));
-        return Redis::expire($redisKey, 1);
+        return Redis::expire($redisKey, 0);
     }
 
     public static function reset_rule()
