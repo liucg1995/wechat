@@ -76,7 +76,7 @@
                                                     @if($v->id==config('app.ruleId.follow'))
                                                         <a href="/wechat/follow">修改关注回复</a>
                                                     @else
-                                                        <a href="?id={{$v->id}}">修改</a> |
+                                                        <a href="/wechat/setrule?id={{$v->id}}">修改</a> |
                                                         <a href="/wechat/deleterule?id={{$v->id}}">删除</a>
                                                     @endif
 
