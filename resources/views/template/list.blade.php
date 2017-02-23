@@ -61,7 +61,7 @@
 
                                                 <td>
                                                     <a href="/template/update?id={{$v->id}}">修改</a> |
-                                                    <a href="/template/delete?id={{$v->id}}">修改</a>
+                                                    <a href="/template/delete?id={{$v->id}}">删除</a>
                                                 </td>
                                             </tr>
                                         @endforeach @endif
