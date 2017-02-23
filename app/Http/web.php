@@ -83,6 +83,18 @@ Route::group(['middleware' => ['web']], function () {
                 Route::post('/pretemplate', 'MassController@pretemplate');//模板消息
                 Route::post('/precustomer', 'MassController@precustomer');//客服消息
             });
+
+            Route::group(['prefix' => 'template'], function () {//KING
+
+                Route::any('/list', 'TemplateController@lists');//列表
+                Route::any('/add','TemplateController@add' );//添加
+                Route::any('/update','TemplateController@update' );//添加
+                Route::any('/sel_data','TemplateController@sel_data' );//添加
+                Route::any('/delete','TemplateController@deletes' );//添加
+                Route::any('/test','TemplateController@test' );//添加
+
+            });
+
         });
     });
 });

@@ -3,6 +3,8 @@
 namespace Guo\Wechat\Http\Controllers;
 
 
+use Guo\Wechat\Jobs\Sendkefu;
+use Guo\Wechat\Jobs\SendTemp;
 use Illuminate\Http\Request;
 use Guo\Wechat\Model\MassLog;
 use Guo\Wechat\Model\Media;
@@ -29,7 +31,7 @@ class MassController extends CommonController
     {
 
 
-        $wechat=  $this->wechat();
+        $wechat = $this->wechat();
         $this->wechat = $wechat;
 
         switch ($request->select) {
@@ -52,6 +54,12 @@ class MassController extends CommonController
         }
 
     }
+
+    /**
+     * @param Request $request
+     * @return $this|\Illuminate\Http\RedirectResponse
+     * 正式群发  文本消息
+     */
 
     public function sendText(Request $request)
     {
@@ -113,6 +121,12 @@ class MassController extends CommonController
         }
     }
 
+    /**
+     * @param Request $request
+     * @return $this|\Illuminate\Http\RedirectResponse
+     * 正式群发  图片消息
+     */
+
     public function sendPicture(Request $request)
     {
         if ($request->select == 'test') {
@@ -171,7 +185,11 @@ class MassController extends CommonController
             return redirect('/mass/index')->with('messages', array(0 => '提交失败'));
         }
     }
-
+    /**
+     * @param Request $request
+     * @return $this|\Illuminate\Http\RedirectResponse
+     * 正式群发  图文消息
+     */
     public function sendPictureText(Request $request)
     {
 
@@ -244,6 +262,13 @@ class MassController extends CommonController
         }
     }
 
+
+
+    /**
+     * @param Request $request
+     * @return $this|\Illuminate\Http\RedirectResponse
+     * 测试群发  文本消息
+     */
     public function preSendText(Request $request)
     {
         if (!($request->select == 'test')) {
@@ -307,6 +332,12 @@ class MassController extends CommonController
 
     }
 
+
+    /**
+     * @param Request $request
+     * @return $this|\Illuminate\Http\RedirectResponse
+     * 测试群发  图片消息
+     */
     public function preSendPicture(Request $request)
     {
         if (!($request->select == 'test')) {
@@ -359,7 +390,7 @@ class MassController extends CommonController
                 $massLog = new MassLog();
                 $massLog->number = 1;
                 $massLog->msgId = $msgId;
-                $massLog->receiver ='OPENID:' . $openid;
+                $massLog->receiver = 'OPENID:' . $openid;
                 $massLog->way = '2';
                 $massLog->contents = '临时图片媒体ID：' . $mediaId;
                 $massLog->result = '提交失败';
@@ -371,6 +402,8 @@ class MassController extends CommonController
 
     /**
      * @param Request $request
+     * @return $this|\Illuminate\Http\RedirectResponse
+     * 测试群发  图问消息
      */
 
     public function preSendPictureText(Request $request)
@@ -409,7 +442,7 @@ class MassController extends CommonController
 
         } else {
             try {
-               $user = User::where("id", $userid)->first(['openid']);
+                $user = User::where("id", $userid)->first(['openid']);
                 $openid = $user->openid;
             } catch (Exception $e) {
                 return redirect('/mass/test')
@@ -447,23 +480,25 @@ class MassController extends CommonController
 
     }
 
-    public  function  pretemplate(Request $request){
-        /**
-         * 测试
-         */
-        foreach ($request->key as $key => $value){
-            $messagedata[$value]=$request->value[$key];
-        }
-        $arr=array(
+    /**
+     * @param Request $request
+     * @return $this|\Illuminate\Http\RedirectResponse
+     * 群发  模板消息
+     */
+
+    public function pretemplate(Request $request)
+    {
+
+        $arr = array(
             "url" => $request->url,
             "templateid" => $request->templateid,
-            'data'=>$messagedata,
-            "remark"=>$request->remark,
-            "first"=>$request->first
+            'data' => $request->data,
+            "remark" => $request->remark,
+            "first" => $request->first
         );
 
         if (!empty($request->userId)) {
-            $userdata = $request->userId;
+            $userdata = User::select("openid")->where("user_id", $request->userId)->get()->toarray();
             $messtype = "测试群发";
             $msgid = "测试无消息id";
             $receiver = "openid:" . $request->userId;
@@ -473,131 +508,68 @@ class MassController extends CommonController
             $msgid = "正式无消息id";
             $receiver = "正式群发";
         }
-
-
-
-//        $messagedata = array(
-//            "小标题" => $request->first,
-//            "策略名称" => $request->invest_product,
-//            "操作风格" => $request->invest_style,
-//            "目前策略收益" => $request->invest_profit,
-//            "备注" => $request->remark,
-//            "点击跳转地址" => $request->url
-//        );
         $str = '';
-        foreach ($messagedata as $key => $value) {
-            $str .= $key . ":" . $value . " , ";
-        }
-        $res=$this->send($arr,$userdata);
-//        $res = $temp->group($url, $data, $userdata);
-        $massLog = new MassLog();
-        $massLog->msgId = $msgid;
-        $massLog->receiver = $receiver;
-        $massLog->way = $messtype;
-        $massLog->contents = $str;
-        $massLog->result = $res['errmsg'];
-        $massLog->save();
-        if ($res['errcode'] == '0') {
-            return redirect()->back()->with('messages', array(0 => '提交成功'));
+        if (empty($request->data)) {
+            return redirect()->back()->with('messages', array("请完整填写信息"));
         } else {
-            return redirect()->back()->with('messages', array(0 => '提交失败', 1 => $res['errmsg']));
+            foreach ($request->data as $key => $value) {
+                $str .= $key . ":" . $value . " , ";
+            }
+            $res = $this->send($arr, $userdata);
+            $massLog = new MassLog();
+            $massLog->msgId = $msgid;
+            $massLog->receiver = $receiver;
+            $massLog->way = $messtype;
+            $massLog->contents = $str;
+            $massLog->result = $res['errmsg'];
+            $massLog->save();
+            if ($res) {
+                return redirect()->back()->with('messages', array(0 => '提交成功'));
+            } else {
+                return redirect()->back()->with('messages', array(0 => '提交失败'));
+            }
         }
 
 
     }
 
 
-    public  function  send($arr,$openid){
-        $notice=$this->wechat->notice;
+    public function send($arr, $openid)
+    {
+        $notice = $this->wechat->notice;
         $templateId = $arr["templateid"];
         $url = $arr["url"];
         $color = '#FF0000';
         $data = $arr["data"];
-        if(is_array($openid)){
-            foreach ($openid as $val){
-                $result = $notice->uses($templateId)->withUrl($url)->andData($data)->andReceiver($val['openid'])->send();
+        if (is_array($openid)) {
+            foreach ($openid as $val) {
+                dispatch(new SendTemp($notice, $templateId, $url, $data, $val['openid']));
+//                $result = $notice->uses($templateId)->withUrl($url)->andData($data)->andReceiver($val['openid'])->send();
             }
-        }else{
-            $result = $notice->uses($templateId)->withUrl($url)->andData($data)->andReceiver($openid)->send();
+        } else {
+            dispatch(new SendTemp($notice, $templateId, $url, $data, $openid));
+//            $result = $notice->uses($templateId)->withUrl($url)->andData($data)->andReceiver($openid)->send();
         }
 
-       return $result;
+        return true;
     }
 
-    /**
-     * 测试模板消息
-     */
-    public function pretemplateas(Request $request)
-    {
-        $temp = new TemplateController();
-        /**
-         * 测试
-         */
-        $url = $request->url;
-        $basic = Basic::where('name', 'TEMPLATEDATA')->first()->value;//模板数据
-        $data = array_flip(explode(',', $basic));
-        $datas = array(
-            $request->first,
-            $request->invest_product,
-            $request->invest_profit,
-            $request->remark
-        );
-        $i = 0;
-        foreach ($data as $key => $value) {
-            $data[$key] = $datas[$i++];
-        }
-        if (!empty($request->userId)) {
-            $userdata = User::select("openid")->where("user_id", $request->userId)->get()->toarray();
-            $messtype = "测试群发";
-            $msgid = "测试无消息id";
-            $receiver = "Userid" . $request->userId;
-        } else {
-            $userdata = User::select("openid")->get()->toarray();
-            $messtype = "正式群发";
-            $msgid = "正式无消息id";
-            $receiver = "正式群发";
-        }
-        $messagedata = array(
-            "小标题" => $request->first,
-            "策略名称" => $request->invest_product,
-            "操作风格" => $request->invest_style,
-            "目前策略收益" => $request->invest_profit,
-            "备注" => $request->remark,
-            "点击跳转地址" => $request->url
-        );
-        $str = '';
-        foreach ($messagedata as $key => $value) {
-            $str .= $key . ":" . $value . " , ";
-        }
-        $res = $temp->group($url, $data, $userdata);
-        $massLog = new MassLog();
-        $massLog->msgId = $msgid;
-        $massLog->receiver = $receiver;
-        $massLog->way = $messtype;
-        $massLog->contents = $str;
-        $massLog->result = $res['errmsg'];
-        $massLog->save();
-        if ($res['errcode'] == '0') {
-            return redirect()->back()->with('messages', array(0 => '提交成功'));
-        } else {
-            return redirect()->back()->with('messages', array(0 => '提交失败', 1 => $res['errmsg']));
-        }
-    }
+
+
 
     /**
-     * 测试客服消息
+     * 客服消息
      */
     public function precustomer(Request $request)
     {
-        $way = ($request['url'] == '/mass/index') ? '正式客服消息' : '测试客服消息';
+        $way = ($request['url'] == '/massf') ? '正式客服消息' : '测试客服消息';
         if (isset($request['userId']) && $request['userId'] != '') {
             //客服消息单发 openid
-
-            $user = User::where("id",$request['userId'])->get([User::$key])->toarray();
+            $user = UserSns::where('user_id', $request['userId'])->where('status', '0')->get(['openid']);
             $receiver = 'userID' . $request['userId'];
         } else {
             //客服消息群发 openid
-            $user = User::get([User::$key])->toarray();
+            $user = UserSns::where('status', '0')->get(['openid']);
             $receiver = '关注且48小时有互动用户';
         }
 
@@ -629,11 +601,11 @@ class MassController extends CommonController
                     $contents = '图片' . $request['media_id'];
                     break;
                 case '4':
-                    return redirect($request['url'])->with('messages', array(0 => '发送音频正在开发中'));
+                    return redirect($request['url'])->with('mgssages', array(0 => '发送音频正在开发中'));
                     //Todo
                     break;
                 case '5':
-                    return redirect($request['url'])->with('messages', array(0 => '发送视频正在开发中'));
+                    return redirect($request['url'])->with('mgssages', array(0 => '发送视频正在开发中'));
                     //Todo
                     break;
                 case '6':
@@ -643,19 +615,33 @@ class MassController extends CommonController
                 default:
                     break;
             }
+        } else {
+            $massLog = new MassLog();
+            $massLog->number = 0;
+            $massLog->msgId = '';
+            $massLog->receiver = $receiver;
+            $massLog->way = $way;
+            $massLog->contents = "";
+            $massLog->result = '提交失败';
+            $massLog->save();
+
+            return redirect($request['url'])->with('mgssages', array(0 => '提交失败'));
         }
         //发送客服消息
         $staff = $this->wechat->staff; // 客服管理
-        $num = 0;
+//        $num = 0;
         foreach ($user as $v) {
-            try {
-                if ($staff->message($message)->to($v['openid'])->send())
-                    $num++;
-            } catch (Exception $e) {
-            }
+            dispatch(new Sendkefu($staff, $message, $v->openid));
+
+//            try {
+//                if ($staff->message($message)->to($v->openid)->send())
+//                    $num++;
+//            } catch (Exception $e) {
+////                return redirect($request['url'])->with('mgssages', array(0 => '提交失败'));
+//            }
         }
         $massLog = new MassLog();
-        $massLog->number = $num;
+//        $massLog->number = $num;
         $massLog->msgId = '';
         $massLog->receiver = $receiver;
         $massLog->way = $way;
@@ -663,7 +649,7 @@ class MassController extends CommonController
         $massLog->result = '提交成功';
         $massLog->save();
 
-        return redirect($request['url'])->with('messages', array(0 => '提交成功'));
+        return redirect($request['url'])->with('mgssages', array(0 => '提交成功'));
     }
 }
 

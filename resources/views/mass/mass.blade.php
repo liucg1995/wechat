@@ -173,26 +173,40 @@
                 <form action="/mass/pretemplate" method="post" name="masspicture" id="mass">
                     {{ csrf_field() }}
                     <div class="box">
-                        <div class="box-header with-border box-danger">
-                            <h3 class="box-title"><label for='test'></label>
-                                <input type='hidden' name='select' value='test' id='tset'>
-                                <div class="box-header with-border box-danger form-group">
-                                    <label class="col-sm-2 control-label"
-                                           style="height:34px;line-height:34px;margin-bottom: 0;padding-left:0px">userid:</label>
-                                    <div class="col-sm-10">
-                                        <input name="userId" type="text" value="{{$userID or old('userId')}}"
-                                               placeholder="请输入userid" class=" form-control" required
-                                               size="30">
-                                    </div>
-                                </div>
-                            </h3>
+                        <div class="box-head hide messagess">
+                            <h3>操作时间可能有点长,请稍等片刻</h3>
                         </div>
                         <div class="box-body">
                             <div id="example2_wrapper" class="dataTables_wrapper  dt-bootstrap">
                                 <div class="row">
-                                    <div class="col-sm-12 template">
+                                    <div class="col-sm-12">
                                         <div class="box-header with-border box-danger form-group">
-                                            <label class="col-sm-2 control-label lable"
+                                        <h3 class="box-title"><label for='test'></label>
+                                            <input type='hidden' name='select' value='test' id='tset'>
+                                            <div class="box-header with-border box-danger form-group">
+                                                <label class="col-sm-2 control-label"
+                                                       style="height:34px;line-height:34px;margin-bottom: 0;padding-left:10px">userid</label>
+                                                <div class="col-sm-10">
+                                                    <input name="userId" type="text" value="{{$userID or old('userId')}}"
+                                                           placeholder="请输入userid" class=" form-control" size="30">
+                                                </div>
+                                            </div>
+                                        </h3>
+                                            </div>
+                                        <div class="box-header with-border box-danger form-group">
+                                            <label class="col-sm-2 control-label right-lable"
+                                                   style="height:34px;line-height:34px;margin-bottom: 0;padding-left:0px">选择模板:</label>
+                                            <div class="col-sm-10">
+                                                <select class="form-control sel-template">
+                                                    <option>请选择</option>
+                                                    @foreach($tlist as $value)
+                                                        <option value="{{$value->id}}">{{$value->title}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="box-header with-border box-danger form-group">
+                                            <label class="col-sm-2 control-label right-lable"
                                                    style="height:34px;line-height:34px;margin-bottom: 0;padding-left:0px">头部说明:</label>
                                             <div class="col-sm-10">
                                                 <input name="first" type="text"
@@ -201,37 +215,23 @@
                                             </div>
                                         </div>
                                         <div class="box-header with-border box-danger form-group">
-                                            <label class="col-sm-2 control-label lable" >模板ID:</label>
+                                            <label class="col-sm-2 control-label right-lable">模板ID:</label>
                                             <div class="col-sm-10">
                                                 <input name="templateid" type="text" value=""
-                                                       placeholder="请输入模板ID" class=" form-control" required size="30">
+                                                       placeholder="请输入模板ID" class=" form-control templateid" required size="30">
                                             </div>
                                         </div>
                                         <div class="box-header with-border box-danger form-group">
-                                            <label class="col-sm-2 control-label lable"
+                                            <label class="col-sm-2 control-label right-lable"
                                             >点击跳转地址:</label>
                                             <div class="col-sm-10">
-                                                <input name="url" type="url" value="{{$userID or old('url')}}"
+                                                <input name="url" type="url" value="{{old('url')}}"
                                                        placeholder="请输入点击跳转地址" class=" form-control" required size="30">
                                             </div>
                                         </div>
-                                        <div class="box-header with-border box-danger form-group">
-                                            <label class="col-sm-2 control-label right-lable">字段:</label>
-                                            <div class="col-sm-4">
-                                                <input name="key[]" type="text"
-                                                       value=""
-                                                       placeholder="请输入字段" class=" form-control" required size="30">
-                                            </div>
-                                            <label class="col-sm-1 control-label right-lable">值:</label>
-                                            <div class="col-sm-4">
-                                                <input name="value[]" type="text" value="" placeholder="请输入数据"
-                                                       class=" form-control" required size="30">
-                                            </div>
-                                            <label class="col-sm-1 control-label right-lable"><i class="fa fa-plus-circle btn btn-success btn-md btn-add"></i></label>
-                                        </div>
 
                                         <div class="box-header with-border box-danger form-group remark">
-                                            <label class="col-sm-2 control-label lable"
+                                            <label class="col-sm-2 control-label right-lable"
                                                    style="height:34px;line-height:34px;margin-bottom: 0;padding-left:0px">备注:</label>
                                             <div class="col-sm-10">
                                                 <input name="remark" type="text"
@@ -240,7 +240,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group col-sm-12" style="padding-bottom: 0">
-                                            <input type="submit" value="测试群发" onclick="return confirm('确定要群发?')"
+                                            <input type="submit" value="群发" onclick="return confirm('确定要群发?')"
                                                    name="resubmit"
                                                    class="btn btn-primary"/>
                                         </div>
@@ -248,6 +248,7 @@
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </form>
             </div>
@@ -402,8 +403,36 @@
                 $(".precustomer").hide();
                 $("." + type).show();
             });
-            $(".btn-add").bind("click",function () {
-                 var  str=' <div class="box-header with-border box-danger form-group"><label class="col-sm-2 control-label right-lable">字段:</label><div class="col-sm-4"><input name="key[]" type="text" value="" placeholder="请输入字段" class=" form-control" required size="30"> </div><label class="col-sm-1 control-label right-lable">值:</label><div class="col-sm-4"><input name="value[]" type="text" value="" placeholder="请输入数据"class=" form-control" required size="30"></div></div>';
+
+            $(".sel-template").change(function () {
+                var id = $(this).val();
+                if (id != '') {
+                    var str = '';
+                    $(".tepmlate-keys").remove();
+                    $(".templateid").val("");
+                    $.ajax({
+                        url: '/template/sel_data',
+                        async: false,
+                        type: "GET",
+                        data: {"id": id},
+                        dataType: "json",
+                        error: function () {
+
+                        },
+                        success: function (data) {
+                            $(".templateid").val(data['main'].template_id);
+                            var strs = data["vice"].length;
+                            for (var i = 0; i < strs; i++) {
+                                str = str + ' <div class="box-header with-border box-danger form-group tepmlate-keys">' +
+                                        '<label class="col-sm-2 control-label right-lable">' + data["vice"][i].value + ':</label>' +
+                                        '<div class="col-sm-4">' +
+                                        '<input name="data[' + data["vice"][i].key + ']" type="text" value="" placeholder="请输入值" class=" form-control" required size="30"> ' +
+                                        '</div>' +
+                                        '</div>';
+                            }
+                        }
+                    });
+                }
                 $(".remark").before(str);
             });
         });

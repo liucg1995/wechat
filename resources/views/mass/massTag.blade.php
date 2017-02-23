@@ -65,16 +65,17 @@
                                 <label class="col-md-2 control-label">缩略图</label>
                                 <div class="col-md-4 thumb-wrap">
                                     <div class="pic-upload btn btn-block btn-info btn-flat" title="点击上传">点击上传</div>
-                                    <img id="logo" class="pic"  src="">
+                                    <img id="logo" class="pic" src="">
                                     <input type="hidden" name="logo" class="picvalue" value="">
                                 </div>
                             </div>
                             <div class="form-group col-sm-12" style="padding-left: 0">
-                                <input type="submit" value="群发" name="opsubmit" onclick="return confirm('确定要群发?')" class="btn btn-primary"/>
+                                <input type="submit" value="群发" name="opsubmit" onclick="return confirm('确定要群发?')"
+                                       class="btn btn-primary"/>
                             </div>
                             <style>
-                                #logo{
-                                    width:100%;
+                                #logo {
+                                    width: 100%;
                                 }
                             </style>
                         </form>
@@ -123,7 +124,19 @@
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="box-header with-border box-danger form-group">
-                                            <label class="col-sm-2 control-label lable"
+                                            <label class="col-sm-2 control-label right-lable"
+                                                   style="height:34px;line-height:34px;margin-bottom: 0;padding-left:0px">选择模板:</label>
+                                            <div class="col-sm-10">
+                                                <select class="form-control sel-template">
+                                                    <option>请选择</option>
+                                                    @foreach($tlist as $value)
+                                                        <option value="{{$value->id}}">{{$value->title}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="box-header with-border box-danger form-group">
+                                            <label class="col-sm-2 control-label right-lable"
                                                    style="height:34px;line-height:34px;margin-bottom: 0;padding-left:0px">头部说明:</label>
                                             <div class="col-sm-10">
                                                 <input name="first" type="text"
@@ -132,37 +145,23 @@
                                             </div>
                                         </div>
                                         <div class="box-header with-border box-danger form-group">
-                                            <label class="col-sm-2 control-label lable" >模板ID:</label>
+                                            <label class="col-sm-2 control-label right-lable">模板ID:</label>
                                             <div class="col-sm-10">
                                                 <input name="templateid" type="text" value=""
-                                                       placeholder="请输入模板ID" class=" form-control" required size="30">
+                                                       placeholder="请输入模板ID" class=" form-control templateid" required size="30">
                                             </div>
                                         </div>
                                         <div class="box-header with-border box-danger form-group">
-                                            <label class="col-sm-2 control-label lable"
+                                            <label class="col-sm-2 control-label right-lable"
                                             >点击跳转地址:</label>
                                             <div class="col-sm-10">
-                                                <input name="url" type="url" value="{{$userID or old('url')}}"
+                                                <input name="url" type="url" value="{{old('url')}}"
                                                        placeholder="请输入点击跳转地址" class=" form-control" required size="30">
                                             </div>
                                         </div>
-                                        <div class="box-header with-border box-danger form-group">
-                                            <label class="col-sm-2 control-label right-lable">字段:</label>
-                                            <div class="col-sm-4">
-                                                <input name="key[]" type="text"
-                                                       value=""
-                                                       placeholder="请输入字段" class=" form-control" required size="30">
-                                            </div>
-                                            <label class="col-sm-1 control-label right-lable">值:</label>
-                                            <div class="col-sm-4">
-                                                <input name="value[]" type="text" value="" placeholder="请输入数据"
-                                                       class=" form-control" required size="30">
-                                            </div>
-                                            <label class="col-sm-1 control-label right-lable"><i class="fa fa-plus-circle btn btn-success btn-md btn-add"></i></label>
-                                        </div>
 
                                         <div class="box-header with-border box-danger form-group remark">
-                                            <label class="col-sm-2 control-label lable"
+                                            <label class="col-sm-2 control-label right-lable"
                                                    style="height:34px;line-height:34px;margin-bottom: 0;padding-left:0px">备注:</label>
                                             <div class="col-sm-10">
                                                 <input name="remark" type="text"
@@ -319,8 +318,35 @@
                     $(".precustomer").hide();
                     $("." + type).show();
                 });
-                $(".btn-add").bind("click",function () {
-                    var  str=' <div class="box-header with-border box-danger form-group"><label class="col-sm-2 control-label right-lable">字段:</label><div class="col-sm-4"><input name="key[]" type="text" value="" placeholder="请输入字段" class=" form-control" required size="30"> </div><label class="col-sm-1 control-label right-lable">值:</label><div class="col-sm-4"><input name="value[]" type="text" value="" placeholder="请输入数据"class=" form-control" required size="30"></div></div>';
+                $(".sel-template").change(function () {
+                    var id = $(this).val();
+                    if (id != '') {
+                        var str = '';
+                        $(".tepmlate-keys").remove();
+                        $(".templateid").val("");
+                        $.ajax({
+                            url: '/template/sel_data',
+                            async: false,
+                            type: "GET",
+                            data: {"id": id},
+                            dataType: "json",
+                            error: function () {
+
+                            },
+                            success: function (data) {
+                                $(".templateid").val(data['main'].template_id);
+                                var strs = data["vice"].length;
+                                for (var i = 0; i < strs; i++) {
+                                    str = str + ' <div class="box-header with-border box-danger form-group tepmlate-keys">' +
+                                            '<label class="col-sm-2 control-label right-lable">' + data["vice"][i].value + ':</label>' +
+                                            '<div class="col-sm-4">' +
+                                            '<input name="data[' + data["vice"][i].key + ']" type="text" value="" placeholder="请输入值" class=" form-control" required size="30"> ' +
+                                            '</div>' +
+                                            '</div>';
+                                }
+                            }
+                        });
+                    }
                     $(".remark").before(str);
                 });
             });
