@@ -4,7 +4,7 @@
 
 # Installation
 
-composer require guo/wechat:dev-master
+composer require guo/wechat
 
 ## Register with config/app.php
 Register the service providers to enable the package:
